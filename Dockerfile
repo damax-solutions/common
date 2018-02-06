@@ -1,5 +1,7 @@
 FROM php:7.2-cli
 
+LABEL maintainer="dmitri@devmachine.net"
+
 # Composer
 RUN cd /usr/local/bin \
     && php -r "readfile('https://getcomposer.org/installer');" | php \
