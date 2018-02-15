@@ -14,5 +14,7 @@
             <argument type="service" id="event_bus" />
         </service>
 
+        <service id="Damax\Common\Domain\Email\EmailRenderer" class="Damax\Common\Bridge\Twig\EmailRenderer" />
+
     </services>
 </container>
