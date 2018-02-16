@@ -15,5 +15,9 @@ class DamaxCommonExtension extends Extension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+
+        if (isset($container->getParameter('kernel.bundles')['DoctrineBundle'])) {
+            $loader->load('doctrine.xml');
+        }
     }
 }
