@@ -28,7 +28,7 @@ class CommandListener implements EventSubscriberInterface
         $this->validator = $validator;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::CONTROLLER => ['onKernelController', -16],
