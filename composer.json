@@ -9,19 +9,26 @@
     "friendsofphp/php-cs-fixer": "^2.10",
     "matthiasnoback/symfony-dependency-injection-test": "^2.3",
     "pagerfanta/pagerfanta": "^1.0",
+    "sensio/framework-extra-bundle": "^5.1",
     "simple-bus/message-bus": "^3.0",
     "symfony/config": "^4.0",
     "symfony/console": "^4.0",
     "symfony/dependency-injection": "^4.0",
     "symfony/http-kernel": "^4.0",
     "symfony/phpunit-bridge": "^4.0",
+    "symfony/serializer": "^4.0",
+    "symfony/validator": "^4.0",
     "twig/twig": "^2.4"
   },
   "autoload": {
-    "psr-4": { "Damax\\Common\\": "src/" }
+    "psr-4": {
+      "Damax\\Common\\": "src/"
+    }
   },
   "autoload-dev": {
-    "psr-4": { "Damax\\Common\\Tests\\": "tests/" }
+    "psr-4": {
+      "Damax\\Common\\Tests\\": "tests/"
+    }
   },
   "extra": {
     "branch-alias": {
