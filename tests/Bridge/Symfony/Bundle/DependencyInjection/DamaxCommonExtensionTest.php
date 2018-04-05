@@ -20,6 +20,7 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setParameter('kernel.bundles', [
             'DoctrineBundle' => true,
+            'SimpleBusEventBusBundle' => true,
         ]);
 
         $this->load([]);

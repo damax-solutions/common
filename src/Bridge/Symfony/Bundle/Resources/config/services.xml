@@ -9,11 +9,6 @@
 
         <prototype namespace="Damax\Common\Bridge\Symfony\Bundle\Listener\" resource="../../Listener" />
 
-        <service id="Damax\Common\Domain\DomainEventPublisher">
-            <argument type="service" id="simple_bus.event_bus.aggregates_recorded_messages" />
-            <argument type="service" id="event_bus" />
-        </service>
-
         <service id="Damax\Common\Domain\Email\EmailRenderer" class="Damax\Common\Bridge\Twig\EmailRenderer" />
 
     </services>
