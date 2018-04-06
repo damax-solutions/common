@@ -38,7 +38,7 @@ class SerializeListener implements EventSubscriberInterface
     {
         $config = $event->getRequest()->attributes->get('_serialize');
 
-        if (!$config instanceof Serialize) {
+        if (!$config instanceof Serialize || $event->getResponse()) {
             return;
         }
 
