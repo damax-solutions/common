@@ -15,7 +15,7 @@ class Serialize implements ConfigurationInterface
 
     public function __construct(array $groups)
     {
-        $this->groups = $groups;
+        $this->groups = $groups['value'] ?? $groups;
     }
 
     public function groups(): array
