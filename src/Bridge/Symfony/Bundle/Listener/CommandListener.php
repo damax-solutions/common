@@ -55,8 +55,10 @@ class CommandListener implements EventSubscriberInterface
         /** @var Command $config */
         $config = $request->attributes->get('_command');
 
+        $context = $config->groups() ? ['groups' => $config->groups()] : [];
+
         try {
-            $command = $this->serializer->deserialize($request->getContent(), $config->className(), self::CONTENT_TYPE);
+            $command = $this->serializer->deserialize($request->getContent(), $config->className(), self::CONTENT_TYPE, $context);
         } catch (ExceptionInterface $e) {
             throw new UnprocessableEntityHttpException('Invalid json.');
         }

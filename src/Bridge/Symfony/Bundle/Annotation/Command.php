@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Damax\Common\Bridge\Symfony\Bundle\Annotation;
 
-use RuntimeException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 
 /**
@@ -12,29 +11,41 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
  */
 class Command implements ConfigurationInterface
 {
-    private $data;
+    /**
+     * @var string
+     */
+    private $class;
+
+    /**
+     * @var bool
+     */
+    private $validate;
+
+    /**
+     * @var string[]
+     */
+    private $groups;
 
     public function __construct(array $data)
     {
-        if (isset($data['value'])) {
-            $data['class'] = $data['value'];
-        }
-
-        if (empty($data['class'])) {
-            throw new RuntimeException(sprintf('Key "class" is not defined for annotation "@%s"', __CLASS__));
-        }
-
-        $this->data = $data;
+        $this->class = $data['class'] ?? $data['value'];
+        $this->validate = $data['validate'] ?? false;
+        $this->groups = $data['groups'] ?? [];
     }
 
     public function className(): string
     {
-        return $this->data['class'];
+        return $this->class;
     }
 
     public function validate(): bool
     {
-        return $this->data['validate'] ?? false;
+        return $this->validate;
+    }
+
+    public function groups(): array
+    {
+        return $this->groups;
     }
 
     public function getAliasName(): string
