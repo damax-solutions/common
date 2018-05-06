@@ -9,6 +9,7 @@ use Fig\Link\Link;
 use Pagerfanta\Pagerfanta;
 use Psr\Link\EvolvableLinkProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -26,6 +27,7 @@ class PaginationListener implements EventSubscriberInterface
     {
         return [
             KernelEvents::VIEW => ['onKernelView', 8],
+            KernelEvents::RESPONSE => 'onKernelResponse',
         ];
     }
 
@@ -38,22 +40,36 @@ class PaginationListener implements EventSubscriberInterface
         }
 
         $attributes = $event->getRequest()->attributes;
+        $route = $attributes->get('_route');
+        $params = $attributes->get('_route_params', []);
 
         /** @var EvolvableLinkProviderInterface $linkProvider */
         $linkProvider = $attributes->get('_links', new GenericLinkProvider());
 
-        $params = $attributes->get('_route_params', []);
-
         foreach ($this->getPages($paginator) as $rel => $page) {
-            $href = $this->urlGenerator->generate(
-                $attributes->get('_route'),
-                $params + ['page' => $page],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            );
+            $href = $this->urlGenerator->generate($route, $params + ['page' => $page], UrlGeneratorInterface::ABSOLUTE_URL);
+
             $linkProvider = $linkProvider->withLink(new Link($rel, $href));
         }
 
         $attributes->set('_links', $linkProvider);
+        $attributes->set('_pager', $paginator);
+    }
+
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
+        $paginator = $event->getRequest()->attributes->get('_pager');
+
+        if (!$paginator instanceof Pagerfanta) {
+            return;
+        }
+
+        $response = $event->getResponse();
+
+        $response->headers->set('X-Page', $paginator->getCurrentPage());
+        $response->headers->set('X-Per-Page', $paginator->getMaxPerPage());
+        $response->headers->set('X-Total-Count', $paginator->getNbResults());
+        $response->headers->set('X-Count', count($paginator->getCurrentPageResults()));
     }
 
     private function getPages(Pagerfanta $paginator): array
