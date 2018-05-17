@@ -73,6 +73,6 @@ class CommandListener implements EventSubscriberInterface
             }
         }
 
-        $request->attributes->set('command', $command);
+        $request->attributes->set($config->param(), $command);
     }
 }

@@ -26,11 +26,17 @@ class Command implements ConfigurationInterface
      */
     private $groups;
 
+    /**
+     * @var string
+     */
+    private $param;
+
     public function __construct(array $data)
     {
         $this->class = $data['class'] ?? $data['value'];
         $this->validate = $data['validate'] ?? false;
         $this->groups = $data['groups'] ?? [];
+        $this->param = $data['param'] ?? 'command';
     }
 
     public function className(): string
@@ -46,6 +52,11 @@ class Command implements ConfigurationInterface
     public function groups(): array
     {
         return $this->groups;
+    }
+
+    public function param(): string
+    {
+        return $this->param;
     }
 
     public function getAliasName(): string
