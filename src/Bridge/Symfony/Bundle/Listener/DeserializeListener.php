@@ -7,12 +7,15 @@ namespace Damax\Common\Bridge\Symfony\Bundle\Listener;
 use Damax\Common\Bridge\Symfony\Bundle\Annotation\Deserialize;
 use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class DeserializeListener implements EventSubscriberInterface
@@ -68,11 +71,22 @@ class DeserializeListener implements EventSubscriberInterface
                 throw new RuntimeException('Validator package is not installed.');
             }
 
-            foreach ($this->validator->validate($data) as $error) {
-                throw new BadRequestHttpException(sprintf('%s: %s', $error->getPropertyPath(), $error->getMessage()));
+            $violations = $this->validator->validate($data);
+
+            if (count($violations)) {
+                $event->setController(function () use ($violations) {
+                    return $this->errorResponse($violations);
+                });
             }
         }
 
         $request->attributes->set($config->param(), $data);
+    }
+
+    private function errorResponse(ConstraintViolationListInterface $violations): Response
+    {
+        $data = $this->serializer->serialize($violations, self::CONTENT_TYPE);
+
+        return JsonResponse::fromJsonString($data, Response::HTTP_BAD_REQUEST, ['Content-Type' => 'application/problem+json']);
     }
 }
