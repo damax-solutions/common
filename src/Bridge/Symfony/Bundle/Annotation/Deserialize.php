@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 /**
  * @Annotation
  */
-class Command implements ConfigurationInterface
+class Deserialize implements ConfigurationInterface
 {
     /**
      * @var string
@@ -36,7 +36,7 @@ class Command implements ConfigurationInterface
         $this->class = $data['class'] ?? $data['value'];
         $this->validate = $data['validate'] ?? false;
         $this->groups = $data['groups'] ?? [];
-        $this->param = $data['param'] ?? 'command';
+        $this->param = $data['param'] ?? 'data';
     }
 
     public function className(): string
@@ -61,7 +61,7 @@ class Command implements ConfigurationInterface
 
     public function getAliasName(): string
     {
-        return 'command';
+        return 'deserialize';
     }
 
     public function allowArray(): bool

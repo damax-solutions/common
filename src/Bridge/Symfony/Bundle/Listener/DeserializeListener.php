@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Damax\Common\Bridge\Symfony\Bundle\Listener;
 
-use Damax\Common\Bridge\Symfony\Bundle\Annotation\Command;
+use Damax\Common\Bridge\Symfony\Bundle\Annotation\Deserialize;
 use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class CommandListener implements EventSubscriberInterface
+class DeserializeListener implements EventSubscriberInterface
 {
     private const CONTENT_TYPE = 'json';
 
@@ -44,7 +44,7 @@ class CommandListener implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
-        if (!$request->attributes->get('_command')) {
+        if (!$request->attributes->get('_deserialize')) {
             return;
         }
 
@@ -52,13 +52,13 @@ class CommandListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var Command $config */
-        $config = $request->attributes->get('_command');
+        /** @var Deserialize $config */
+        $config = $request->attributes->get('_deserialize');
 
         $context = $config->groups() ? ['groups' => $config->groups()] : [];
 
         try {
-            $command = $this->serializer->deserialize($request->getContent(), $config->className(), self::CONTENT_TYPE, $context);
+            $data = $this->serializer->deserialize($request->getContent(), $config->className(), self::CONTENT_TYPE, $context);
         } catch (ExceptionInterface $e) {
             throw new UnprocessableEntityHttpException('Invalid json.');
         }
@@ -68,11 +68,11 @@ class CommandListener implements EventSubscriberInterface
                 throw new RuntimeException('Validator package is not installed.');
             }
 
-            foreach ($this->validator->validate($command) as $error) {
+            foreach ($this->validator->validate($data) as $error) {
                 throw new BadRequestHttpException(sprintf('%s: %s', $error->getPropertyPath(), $error->getMessage()));
             }
         }
 
-        $request->attributes->set($config->param(), $command);
+        $request->attributes->set($config->param(), $data);
     }
 }
