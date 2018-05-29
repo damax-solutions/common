@@ -1,0 +1,69 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_row %}
+{% spaceless %}
+    {% if compound %}
+        {{ form_widget(form) }}
+    {% else %}
+        <div class="field">
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set attr = attr | merge({ class: 'input is-large', placeholder: label }) %}
+
+    {{ parent() }}
+{% endspaceless %}
+{% endblock %}
+
+{% block textarea_widget %}
+    {% set attr = attr | merge({ class: 'textarea is-large', placeholder: label }) %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block choice_widget_collapsed %}
+{% spaceless %}
+    <div class="control">
+        <div class="select is-large is-rounded is-fullwidth">
+            {{ parent() }}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock %}
+
+{% block form_widget %}
+{% spaceless %}
+    {% if compound %}
+        {{ block('form_widget_compound') }}
+    {% else %}
+        <div class="control">
+            {{ block('form_widget_simple') }}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block form_widget_compound %}
+{% spaceless %}
+    {% if form is rootform %}
+        {{ form_errors(form) }}
+    {% endif %}
+
+    {{ block('form_rows') }}
+    {{ form_rest(form) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block form_errors %}
+{% spaceless %}
+    {% for error in errors %}
+        <p class="help is-danger has-text-left">{{ error.message }}</p>
+    {% endfor %}
+{% endspaceless %}
+{% endblock %}
