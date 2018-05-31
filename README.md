@@ -1,26 +1,11 @@
-## Development
+# Damax Common
 
-Build image:
+[![Build Status](https://travis-ci.org/lakiboy/damax-c9.svg?branch=master)](https://travis-ci.org/lakiboy/damax-common) [![Coverage Status](https://coveralls.io/repos/lakiboy/damax-common/badge.svg?branch=master&service=github)](https://coveralls.io/github/lakiboy/damax-common?branch=master) 
 
-```bash
-$ docker build -t damax-common .
-```
+API key and/or [JWT](https://jwt.io/) authentication for Symfony application.
 
-Install dependencies:
+## Documentation
 
-```bash
-$ docker run --rm -v $(pwd):/app -w /app damax-common composer install
-```
+Topics:
 
-Fix php coding standards:
-
-```bash
-$ docker run --rm -v $(pwd):/app -w /app damax-common ./vendor/bin/php-cs-fixer fix
-```
-
-Running tests:
-
-```bash
-$ docker run --rm -v $(pwd):/app -w /app damax-common ./vendor/bin/simple-phpunit
-$ docker run --rm -v $(pwd):/app -w /app damax-common ./bin/phpunit-coverage
-```
+- [Development](doc/development.md)

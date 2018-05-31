@@ -1,0 +1,29 @@
+sudo: false
+
+language: php
+
+php:
+    - 7.1
+    - 7.2
+
+env:
+    global:
+        - SYMFONY_PHPUNIT_VERSION=6.5
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+matrix:
+    include:
+        - php: 7.1
+          env: SYMFONY_LOWEST="--prefer-lowest"
+
+install:
+    - composer install --prefer-dist
+
+script:
+    - vendor/bin/simple-phpunit --coverage-clover=build/logs/clover.xml
+
+after_script:
+    - vendor/bin/php-coveralls
