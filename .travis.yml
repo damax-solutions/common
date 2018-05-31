@@ -14,11 +14,6 @@ cache:
     directories:
         - $HOME/.composer/cache
 
-matrix:
-    include:
-        - php: 7.1
-          env: SYMFONY_LOWEST="--prefer-lowest"
-
 install:
     - composer install --prefer-dist
 
