@@ -37,6 +37,22 @@
 {% endspaceless %}
 {% endblock %}
 
+{% block checkbox_widget %}
+{% spaceless %}
+    <div class="control">
+        <label class="checkbox">
+            {{ parent() }}
+
+            {% if translation_domain is same as(false) %}
+                {{ label }}
+            {% else %}
+                {{ label | trans({}, translation_domain) }}
+            {% endif %}
+        </label>
+    </div>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
 {% block form_widget %}
 {% spaceless %}
     {% if compound %}
