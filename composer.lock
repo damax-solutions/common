@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d2190881b9d3bf6d5119ddca2598bd7",
+    "content-hash": "9f9a4b236c6e1dcfd821345b8187b8a2",
     "packages": [],
     "packages-dev": [
         {
@@ -1056,26 +1056,34 @@
         },
         {
             "name": "matthiasnoback/symfony-config-test",
-            "version": "3.1.1",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyTest/SymfonyConfigTest.git",
-                "reference": "65f2d687639a1d6bc92bac6e5f1bd759624d0e7d"
+                "reference": "d69210afc4aca99038d522f59ccf5074aff2f2e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyTest/SymfonyConfigTest/zipball/65f2d687639a1d6bc92bac6e5f1bd759624d0e7d",
-                "reference": "65f2d687639a1d6bc92bac6e5f1bd759624d0e7d",
+                "url": "https://api.github.com/repos/SymfonyTest/SymfonyConfigTest/zipball/d69210afc4aca99038d522f59ccf5074aff2f2e1",
+                "reference": "d69210afc4aca99038d522f59ccf5074aff2f2e1",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
-                "symfony/config": "^2.3 || ^3.0 || ^4.0"
+                "php": "^7.1",
+                "symfony/config": "^2.7 || ^3.4 || ^4.0"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.0"
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Matthias\\SymfonyConfigTest\\": ""
@@ -1099,34 +1107,34 @@
                 "phpunit",
                 "symfony"
             ],
-            "time": "2018-03-05T09:18:57+00:00"
+            "time": "2018-03-05T09:21:43+00:00"
         },
         {
             "name": "matthiasnoback/symfony-dependency-injection-test",
-            "version": "v2.3.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyTest/SymfonyDependencyInjectionTest.git",
-                "reference": "19efe31b64329b23af03a659275f9ffd4cdd2941"
+                "reference": "17e93d791c39849edce452723928b8172691e9c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyTest/SymfonyDependencyInjectionTest/zipball/19efe31b64329b23af03a659275f9ffd4cdd2941",
-                "reference": "19efe31b64329b23af03a659275f9ffd4cdd2941",
+                "url": "https://api.github.com/repos/SymfonyTest/SymfonyDependencyInjectionTest/zipball/17e93d791c39849edce452723928b8172691e9c9",
+                "reference": "17e93d791c39849edce452723928b8172691e9c9",
                 "shasum": ""
             },
             "require": {
-                "matthiasnoback/symfony-config-test": "^3.0",
-                "php": "^7.0",
+                "matthiasnoback/symfony-config-test": "^4.0",
+                "php": "^7.1",
                 "symfony/config": "^2.7 || ^3.3 || ^4.0",
                 "symfony/dependency-injection": "^2.7 || ^3.3 || ^4.0",
                 "symfony/yaml": "^2.7 || ^3.3 || ^4.0"
             },
             "conflict": {
-                "phpunit/phpunit": "<6.0"
+                "phpunit/phpunit": "<7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.0"
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "autoload": {
@@ -1152,7 +1160,7 @@
                 "dependency injection",
                 "phpunit"
             ],
-            "time": "2018-03-06T08:34:50+00:00"
+            "time": "2018-03-06T08:36:41+00:00"
         },
         {
             "name": "pagerfanta/pagerfanta",
