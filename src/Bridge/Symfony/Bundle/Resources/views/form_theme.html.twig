@@ -15,14 +15,22 @@
 
 {% block form_widget_simple %}
 {% spaceless %}
-    {% set attr = attr | merge({ class: 'input is-large', placeholder: label }) %}
+    {% set attr = attr | merge({ class: 'input is-large' }) %}
+
+    {% if label %}
+        {% set attr = attr | merge({ placeholder: label }) %}
+    {% endif %}
 
     {{ parent() }}
 {% endspaceless %}
 {% endblock %}
 
 {% block textarea_widget %}
-    {% set attr = attr | merge({ class: 'textarea is-large', placeholder: label }) %}
+    {% set attr = attr | merge({ class: 'textarea is-large' }) %}
+
+    {% if label %}
+        {% set attr = attr | merge({ placeholder: label }) %}
+    {% endif %}
 
     {{ parent() }}
 {% endblock %}
