@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Damax\Common\Tests\Bridge\Symfony\Bundle\DependencyInjection;
 
+use Damax\Common\Bridge\RamseyUuid\UuidNormalizer;
 use Damax\Common\Bridge\Symfony\Bundle\DependencyInjection\DamaxCommonExtension;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\DeserializeListener;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\DomainEventListener;
@@ -24,6 +25,17 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
         parent::setUp();
 
         $this->container->setParameter('kernel.bundles', []);
+    }
+
+    /**
+     * @test
+     */
+    public function it_registers_services()
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasService(UuidNormalizer::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(UuidNormalizer::class, 'serializer.normalizer');
     }
 
     /**

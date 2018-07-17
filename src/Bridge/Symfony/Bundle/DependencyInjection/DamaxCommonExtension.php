@@ -8,6 +8,7 @@ use Damax\Common\Bridge\Symfony\Bundle\Listener\DeserializeListener;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\DomainEventListener;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\PaginationListener;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\SerializeListener;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -31,6 +32,10 @@ final class DamaxCommonExtension extends ConfigurableExtension
 
         if (isset($bundles['SimpleBusEventBusBundle'])) {
             $loader->load('simple-bus.xml');
+        }
+
+        if (class_exists(Uuid::class)) {
+            $loader->load('ramsey_uuid.xml');
         }
 
         $this->configureListeners($config['listeners'], $container);
