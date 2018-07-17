@@ -28,7 +28,15 @@
     "symfony/phpunit-bridge": "^4.0",
     "symfony/serializer": "^4.0",
     "symfony/validator": "^4.0",
+    "symfony/web-link": "^4.1",
     "twig/twig": "^2.4"
+  },
+  "scripts": {
+    "cs": "php-cs-fixer fix",
+    "test": "simple-phpunit",
+    "test-cc": "./bin/phpunit-coverage",
+    "test-ci": "simple-phpunit --coverage-clover=build/logs/clover.xml",
+    "test-publish": "php-coveralls"
   },
   "config": {
     "sort-packages": true

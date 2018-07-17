@@ -36,8 +36,6 @@ class AsArrayTraitTest extends TestCase
 
         $this->assertEquals('Foo value', $this->object['foo_field']);
         $this->assertEquals(123, $this->object['bar_field']);
-
-        // Internal prop as array.
         $this->assertEquals('Internal foo value', $this->object['baz_field']['foo_field']);
         $this->assertEquals(456, $this->object['baz_field']['bar_field']);
         $this->assertNull($this->object['baz_field']['baz_field']);
@@ -46,7 +44,7 @@ class AsArrayTraitTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_exception_when_mutating_property()
+    public function it_forbids_property_mutation()
     {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Method "Damax\Common\Application\AsArrayTrait::offsetSet" not implemented.');
@@ -57,7 +55,7 @@ class AsArrayTraitTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_exception_when_deleting_property()
+    public function it_forbids_property_deletion()
     {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Method "Damax\Common\Application\AsArrayTrait::offsetUnset" not implemented.');

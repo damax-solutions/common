@@ -7,7 +7,7 @@ namespace Damax\Common\Pagerfanta;
 use Pagerfanta\Adapter\AdapterInterface;
 use Traversable;
 
-class CallableDecoratorAdapter implements AdapterInterface
+final class CallableDecoratorAdapter implements AdapterInterface
 {
     private $adapter;
     private $callback;

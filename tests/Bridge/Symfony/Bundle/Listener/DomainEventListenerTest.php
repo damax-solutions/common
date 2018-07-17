@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Damax\Common\Tests\Bridge\Symfony\Bundle\Listener;
 
 use Damax\Common\Bridge\Symfony\Bundle\Listener\DomainEventListener;
-use Damax\Common\Domain\DomainEventPublisher;
+use Damax\Common\Domain\EventPublisher\EventPublisher;
 use Exception;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class DomainEventListenerTest extends TestCase
 {
     /**
-     * @var DomainEventPublisher|PHPUnit_Framework_MockObject_MockObject
+     * @var EventPublisher|MockObject
      */
     private $publisher;
 
@@ -33,7 +33,7 @@ class DomainEventListenerTest extends TestCase
 
     protected function setUp()
     {
-        $this->publisher = $this->createMock(DomainEventPublisher::class);
+        $this->publisher = $this->createMock(EventPublisher::class);
         $this->dispatcher = new EventDispatcher();
         $this->dispatcher->addSubscriber(new DomainEventListener($this->publisher));
     }

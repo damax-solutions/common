@@ -6,13 +6,13 @@ namespace Damax\Common\Tests\Doctrine\Dbal;
 
 use Damax\Common\Doctrine\Dbal\TransactionManager;
 use Doctrine\DBAL\Connection;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 
 class TransactionManagerTest extends TestCase
 {
     /**
-     * @var Connection|PHPUnit_Framework_MockObject_MockObject
+     * @var Connection|MockObject
      */
     private $db;
 

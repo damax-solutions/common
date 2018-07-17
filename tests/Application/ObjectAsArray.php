@@ -7,7 +7,7 @@ namespace Damax\Common\Tests\Application;
 use ArrayAccess;
 use Damax\Common\Application\AsArrayTrait;
 
-class ObjectAsArray implements ArrayAccess
+final class ObjectAsArray implements ArrayAccess
 {
     use AsArrayTrait;
 

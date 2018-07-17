@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Damax\Common\Tests\Domain;
+namespace Damax\Common\Tests\Domain\EventPublisher;
 
-use Damax\Common\Domain\DomainEventPublisher;
+use Damax\Common\Domain\EventPublisher\SimpleBusEventPublisher;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use stdClass;
 
-class DomainEventPublisherTest extends TestCase
+class SimpleBusDomainEventPublisherTest extends TestCase
 {
     /**
-     * @var ContainsRecordedMessages|PHPUnit_Framework_MockObject_MockObject
+     * @var ContainsRecordedMessages|MockObject
      */
     private $recorder;
 
     /**
-     * @var MessageBus|PHPUnit_Framework_MockObject_MockObject
+     * @var MessageBus|MockObject
      */
     private $messageBus;
 
     /**
-     * @var DomainEventPublisher
+     * @var SimpleBusEventPublisher
      */
     private $publisher;
 
@@ -32,7 +32,7 @@ class DomainEventPublisherTest extends TestCase
     {
         $this->recorder = $this->createMock(ContainsRecordedMessages::class);
         $this->messageBus = $this->createMock(MessageBus::class);
-        $this->publisher = new DomainEventPublisher($this->recorder, $this->messageBus);
+        $this->publisher = new SimpleBusEventPublisher($this->recorder, $this->messageBus);
     }
 
     /**

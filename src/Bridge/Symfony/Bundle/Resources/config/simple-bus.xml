@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <defaults autowire="true" public="false" />
+
+        <service id="Damax\Common\Domain\EventPublisher\EventPublisher" class="Damax\Common\Domain\EventPublisher\SimpleBusEventPublisher">
+            <argument type="service" id="simple_bus.event_bus.aggregates_recorded_message" />
+            <argument type="service" id="event_bus" />
+        </service>
+
+        <service id="Damax\Common\Bridge\Symfony\Bundle\Listener\DomainEventListener">
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+    </services>
+</container>

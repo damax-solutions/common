@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 /**
  * @Annotation
  */
-class Serialize implements ConfigurationInterface
+final class Serialize implements ConfigurationInterface
 {
     private $groups;
 

@@ -5,9 +5,7 @@
 
     <services>
 
-        <defaults autowire="true" autoconfigure="true" public="false" />
-
-        <prototype namespace="Damax\Common\Bridge\Symfony\Bundle\Listener\" resource="../../Listener" />
+        <defaults autowire="true" public="false" />
 
         <service id="Damax\Common\Domain\Email\EmailRenderer" class="Damax\Common\Bridge\Twig\EmailRenderer" />
 

@@ -6,6 +6,6 @@ namespace Damax\Common\Bridge\Symfony\Bundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class DamaxCommonBundle extends Bundle
+final class DamaxCommonBundle extends Bundle
 {
 }

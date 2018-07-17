@@ -15,12 +15,12 @@ $ docker run --rm -v $(pwd):/app -w /app damax-common composer install
 Fix php coding standards:
 
 ```bash
-$ docker run --rm -v $(pwd):/app -w /app damax-common ./vendor/bin/php-cs-fixer fix
+$ docker run --rm -v $(pwd):/app -w /app damax-common composer cs
 ```
 
 Running tests:
 
 ```bash
-$ docker run --rm -v $(pwd):/app -w /app damax-common ./vendor/bin/simple-phpunit
-$ docker run --rm -v $(pwd):/app -w /app damax-common ./bin/phpunit-coverage
+$ docker run --rm -v $(pwd):/app -w /app damax-common composer test
+$ docker run --rm -v $(pwd):/app -w /app damax-common composer test-cc
 ```

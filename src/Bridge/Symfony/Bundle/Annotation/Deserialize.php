@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 /**
  * @Annotation
  */
-class Deserialize implements ConfigurationInterface
+final class Deserialize implements ConfigurationInterface
 {
     /**
      * @var string

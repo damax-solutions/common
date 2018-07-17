@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Damax\Common\Domain;
+namespace Damax\Common\Domain\EventPublisher;
 
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
-class DomainEventPublisher
+final class SimpleBusEventPublisher implements EventPublisher
 {
     private $recorder;
     private $eventBus;
@@ -18,7 +18,7 @@ class DomainEventPublisher
         $this->eventBus = $eventBus;
     }
 
-    public function publish()
+    public function publish(): void
     {
         $eventStream = $this->recorder->recordedMessages();
 
@@ -33,7 +33,7 @@ class DomainEventPublisher
         }
     }
 
-    public function discard()
+    public function discard(): void
     {
         $this->recorder->eraseMessages();
     }

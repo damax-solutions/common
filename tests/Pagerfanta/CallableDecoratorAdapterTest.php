@@ -6,13 +6,13 @@ namespace Damax\Common\Tests\Pagerfanta;
 
 use Damax\Common\Pagerfanta\CallableDecoratorAdapter;
 use Pagerfanta\Adapter\AdapterInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 
 class CallableDecoratorAdapterTest extends TestCase
 {
     /**
-     * @var AdapterInterface|PHPUnit_Framework_MockObject_MockObject
+     * @var AdapterInterface|MockObject
      */
     private $decorated;
 

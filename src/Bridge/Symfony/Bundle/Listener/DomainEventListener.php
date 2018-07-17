@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Damax\Common\Bridge\Symfony\Bundle\Listener;
 
-use Damax\Common\Domain\DomainEventPublisher;
+use Damax\Common\Domain\EventPublisher\EventPublisher;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
@@ -17,7 +17,7 @@ class DomainEventListener implements EventSubscriberInterface
 {
     private $publisher;
 
-    public function __construct(DomainEventPublisher $publisher)
+    public function __construct(EventPublisher $publisher)
     {
         $this->publisher = $publisher;
     }

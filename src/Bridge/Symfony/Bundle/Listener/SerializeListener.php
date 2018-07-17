@@ -29,9 +29,7 @@ class SerializeListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
-        return [
-            KernelEvents::VIEW => 'onKernelView',
-        ];
+        return [KernelEvents::VIEW => 'onKernelView'];
     }
 
     public function onKernelView(GetResponseForControllerResultEvent $event)

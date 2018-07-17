@@ -8,7 +8,7 @@ use Closure;
 use Damax\Common\Domain\Transaction\TransactionManager as TransactionManagerInterface;
 use Doctrine\DBAL\Connection;
 
-class TransactionManager implements TransactionManagerInterface
+final class TransactionManager implements TransactionManagerInterface
 {
     private $db;
 

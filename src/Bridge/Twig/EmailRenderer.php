@@ -8,7 +8,7 @@ use Damax\Common\Domain\Email\EmailRenderer as EmailRendererInterface;
 use Damax\Common\Domain\Email\Template;
 use Twig_Environment;
 
-class EmailRenderer implements EmailRendererInterface
+final class EmailRenderer implements EmailRendererInterface
 {
     private $twig;
 

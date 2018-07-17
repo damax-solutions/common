@@ -6,7 +6,7 @@ namespace Damax\Common\Domain\Transaction;
 
 use Closure;
 
-class DummyTransactionManager implements TransactionManager
+final class DummyTransactionManager implements TransactionManager
 {
     public function begin(): void
     {

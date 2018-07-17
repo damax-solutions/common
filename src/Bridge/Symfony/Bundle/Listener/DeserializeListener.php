@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Damax\Common\Bridge\Symfony\Bundle\Listener;
 
 use Damax\Common\Bridge\Symfony\Bundle\Annotation\Deserialize;
-use RuntimeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +24,7 @@ class DeserializeListener implements EventSubscriberInterface
     private $serializer;
     private $validator;
 
-    public function __construct(SerializerInterface $serializer, ValidatorInterface $validator = null)
+    public function __construct(SerializerInterface $serializer, ValidatorInterface $validator)
     {
         $this->serializer = $serializer;
         $this->validator = $validator;
@@ -41,7 +40,6 @@ class DeserializeListener implements EventSubscriberInterface
     /**
      * @throws UnprocessableEntityHttpException
      * @throws BadRequestHttpException
-     * @throws RuntimeException
      */
     public function onKernelController(FilterControllerEvent $event)
     {
@@ -67,13 +65,7 @@ class DeserializeListener implements EventSubscriberInterface
         }
 
         if ($config->validate()) {
-            if (!$this->validator) {
-                throw new RuntimeException('Validator package is not installed.');
-            }
-
-            $violations = $this->validator->validate($data);
-
-            if (count($violations)) {
+            if (count($violations = $this->validator->validate($data))) {
                 $event->setController(function () use ($violations) {
                     return $this->errorResponse($violations);
                 });

@@ -6,13 +6,13 @@ namespace Damax\Common\Tests\Doctrine\Orm;
 
 use Damax\Common\Doctrine\Orm\TransactionManager;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 
 class TransactionManagerTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|PHPUnit_Framework_MockObject_MockObject
+     * @var EntityManagerInterface|MockObject
      */
     private $em;
 

@@ -7,6 +7,9 @@ namespace Damax\Common\Doctrine\Orm;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait OrmRepositoryTrait
 {
     /**
