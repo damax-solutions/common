@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Damax\Common\Tests\Bridge\Symfony\Bundle\DependencyInjection;
 
 use Damax\Common\Bridge\Symfony\Bundle\DependencyInjection\DamaxCommonExtension;
+use Damax\Common\Bridge\Symfony\Bundle\Listener\DeserializeListener;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\DomainEventListener;
+use Damax\Common\Bridge\Symfony\Bundle\Listener\PaginationListener;
+use Damax\Common\Bridge\Symfony\Bundle\Listener\SerializeListener;
 use Damax\Common\Bridge\Twig\EmailRenderer as TwigEmailRenderer;
 use Damax\Common\Doctrine\Dbal\TransactionManager as DbalTransactionManager;
 use Damax\Common\Doctrine\Orm\TransactionManager as OrmTransactionManager;
@@ -58,7 +61,48 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasService(EventPublisher::class, SimpleBusEventPublisher::class);
+    }
+
+    /**
+     * @test
+     */
+    public function it_registers_domain_events_listener()
+    {
+        $this->load([
+            'listeners' => ['domain_events' => true],
+        ]);
+
         $this->assertContainerBuilderHasService(DomainEventListener::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(DomainEventListener::class, 'kernel.event_subscriber');
+    }
+
+    /**
+     * @test
+     */
+    public function it_registers_annotation_listeners()
+    {
+        $this->load([
+            'listeners' => ['serialize' => true, 'deserialize' => true],
+        ]);
+
+        $this->assertContainerBuilderHasService(SerializeListener::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(SerializeListener::class, 'kernel.event_subscriber');
+
+        $this->assertContainerBuilderHasService(DeserializeListener::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(DeserializeListener::class, 'kernel.event_subscriber');
+    }
+
+    /**
+     * @test
+     */
+    public function it_registers_pagination_listener()
+    {
+        $this->load([
+            'listeners' => ['pagination' => true],
+        ]);
+
+        $this->assertContainerBuilderHasService(PaginationListener::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(PaginationListener::class, 'kernel.event_subscriber');
     }
 
     protected function getContainerExtensions(): array

@@ -58,21 +58,21 @@ class DeserializeListener implements EventSubscriberInterface
 
         $context = $config->groups() ? ['groups' => $config->groups()] : [];
 
+        // Deserialize body into object.
         try {
-            $data = $this->serializer->deserialize($request->getContent(), $config->className(), self::CONTENT_TYPE, $context);
+            $object = $this->serializer->deserialize($request->getContent(), $config->className(), self::CONTENT_TYPE, $context);
         } catch (ExceptionInterface $e) {
             throw new UnprocessableEntityHttpException('Invalid json.');
         }
 
-        if ($config->validate()) {
-            if (count($violations = $this->validator->validate($data))) {
-                $event->setController(function () use ($violations) {
-                    return $this->errorResponse($violations);
-                });
-            }
+        // Validate object and send problem response on failure.
+        if ($config->validate() && count($violations = $this->validator->validate($object))) {
+            $event->setController(function () use ($violations) {
+                return $this->errorResponse($violations);
+            });
         }
 
-        $request->attributes->set($config->param(), $data);
+        $request->attributes->set($config->param(), $object);
     }
 
     private function errorResponse(ConstraintViolationListInterface $violations): Response

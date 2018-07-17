@@ -40,11 +40,7 @@ class SerializeListener implements EventSubscriberInterface
             return;
         }
 
-        $context = [];
-
-        if ($config->groups()) {
-            $context['groups'] = $config->groups();
-        }
+        $context = $config->groups() ? ['groups' => $config->groups()] : [];
 
         $json = $this->serializer->serialize($event->getControllerResult(), self::CONTENT_TYPE, $context);
 
