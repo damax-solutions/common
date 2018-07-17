@@ -8,7 +8,7 @@
         <defaults autowire="true" public="false" />
 
         <service id="Damax\Common\Domain\EventPublisher\EventPublisher" class="Damax\Common\Domain\EventPublisher\SimpleBusEventPublisher">
-            <argument type="service" id="simple_bus.event_bus.aggregates_recorded_message" />
+            <argument type="service" id="simple_bus.event_bus.aggregates_recorded_messages" />
             <argument type="service" id="event_bus" />
         </service>
 
