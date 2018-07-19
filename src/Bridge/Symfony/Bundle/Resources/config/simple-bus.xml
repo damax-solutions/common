@@ -12,5 +12,9 @@
             <argument type="service" id="event_bus" />
         </service>
 
+        <service id="Damax\Common\Bridge\Enqueue\Consumption\Extension\EventPublisherExtension">
+            <tag name="enqueue.consumption.extension" priority="-512" />
+        </service>
+
     </services>
 </container>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Damax\Common\Tests\Bridge\Symfony\Bundle\DependencyInjection;
 
+use Damax\Common\Bridge\Enqueue\Consumption\Extension\EventPublisherExtension;
 use Damax\Common\Bridge\RamseyUuid\UuidNormalizer;
 use Damax\Common\Bridge\Symfony\Bundle\DependencyInjection\DamaxCommonExtension;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\DeserializeListener;
@@ -73,6 +74,8 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasService(EventPublisher::class, SimpleBusEventPublisher::class);
+        $this->assertContainerBuilderHasService(EventPublisherExtension::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(EventPublisherExtension::class, 'enqueue.consumption.extension', ['priority' => -512]);
     }
 
     /**
