@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e24745f39ae176d6feff444b0b330f40",
+    "content-hash": "e414003fad9ab40aeba95927c53af9de",
     "packages": [],
     "packages-dev": [
         {
@@ -1025,16 +1025,16 @@
         },
         {
             "name": "enqueue/enqueue",
-            "version": "0.8.29",
+            "version": "0.8.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/enqueue.git",
-                "reference": "d637e699d15b5343daa5c16d3b5b3641bc502c0b"
+                "reference": "0200aeaa9a501556434f39b1cc77c3a205f6ac84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/d637e699d15b5343daa5c16d3b5b3641bc502c0b",
-                "reference": "d637e699d15b5343daa5c16d3b5b3641bc502c0b",
+                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/0200aeaa9a501556434f39b1cc77c3a205f6ac84",
+                "reference": "0200aeaa9a501556434f39b1cc77c3a205f6ac84",
                 "shasum": ""
             },
             "require": {
@@ -1108,7 +1108,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2018-05-04T05:47:00+00:00"
+            "time": "2018-07-26T15:57:56+00:00"
         },
         {
             "name": "enqueue/null",
