@@ -9,13 +9,20 @@ php:
 env:
     global:
         - SYMFONY_PHPUNIT_VERSION=6.5
+        - SYMFONY_LOWEST=
 
 cache:
     directories:
         - $HOME/.composer/cache
 
+matrix:
+    include:
+        - php: 7.1
+          env: SYMFONY_LOWEST="3.4.*
+
 install:
     - composer install --prefer-dist
+    - if [ "$SYMFONY_LOWEST" != "" ]; then composer require symfony/framework-bundle:$SYMFONY_LOWEST --dev; fi
 
 script:
     - composer test-ci

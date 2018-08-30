@@ -9,7 +9,7 @@ use Enqueue\Consumption\Context;
 use Enqueue\Consumption\EmptyExtensionTrait;
 use Enqueue\Consumption\ExtensionInterface;
 
-class EventPublisherExtension implements ExtensionInterface
+final class EventPublisherExtension implements ExtensionInterface
 {
     use EmptyExtensionTrait;
 
