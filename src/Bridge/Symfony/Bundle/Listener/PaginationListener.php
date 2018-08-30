@@ -66,10 +66,13 @@ class PaginationListener implements EventSubscriberInterface
 
         $response = $event->getResponse();
 
+        $total = $paginator->getNbResults();
+        $count = $total ? $paginator->getCurrentPageOffsetEnd() - $paginator->getCurrentPageOffsetStart() + 1 : 0;
+
         $response->headers->set('X-Page', $paginator->getCurrentPage());
         $response->headers->set('X-Per-Page', $paginator->getMaxPerPage());
-        $response->headers->set('X-Total-Count', $paginator->getNbResults());
-        $response->headers->set('X-Count', count($paginator->getCurrentPageResults()));
+        $response->headers->set('X-Total-Count', $total);
+        $response->headers->set('X-Count', $count);
     }
 
     private function getPages(Pagerfanta $paginator): array
