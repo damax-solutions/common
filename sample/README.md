@@ -1,6 +1,6 @@
 # Sample application
 
-Check [this document](../doc/development.md) how to build Docker image.
+Check [this document](../doc/development.md) how to build _Docker_ image.
 
 ## Installation
 
@@ -28,6 +28,12 @@ Run built-in _HTTP_ server:
 
 ```bash
 $ docker run --rm -v $(pwd):/app -w /app -p 8080:8080 damax-common ./bin/console server:run *:8080
+```
+
+Browse _API_ docs:
+
+```bash
+$ open http://127.0.0.1:8080/api/doc
 ```
 
 ## Contribute
