@@ -32,7 +32,7 @@ final class BookService
     public function create(CreateBook $command): BookDto
     {
         $info = $command->book();
-        $book = new Book($this->idGenerator->bookId(), AuthorId::fromString($info->authorId), $info->title);
+        $book = new Book($this->idGenerator->bookId(), AuthorId::fromString($info['author_id']), $info['title']);
 
         $this->books->add($book);
 

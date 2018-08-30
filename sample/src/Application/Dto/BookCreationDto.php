@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Application\Dto;
 
+use ArrayAccess;
 use Damax\Common\Application\AsArrayTrait;
 
-final class BookCreationDto
+final class BookCreationDto implements ArrayAccess
 {
     use AsArrayTrait;
 
