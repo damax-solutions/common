@@ -6,11 +6,7 @@ namespace Damax\Common\Bridge\Symfony\Bundle\Listener;
 
 use Damax\Common\Domain\EventPublisher\EventPublisher;
 use Symfony\Component\Console\ConsoleEvents;
-use Symfony\Component\Console\Event\ConsoleErrorEvent;
-use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class DomainEventListener implements EventSubscriberInterface
@@ -32,22 +28,22 @@ class DomainEventListener implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse()
     {
         $this->publisher->publish();
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event)
+    public function onKernelException()
     {
         $this->publisher->discard();
     }
 
-    public function onConsoleTerminate(ConsoleTerminateEvent $event)
+    public function onConsoleTerminate()
     {
         $this->publisher->publish();
     }
 
-    public function onConsoleError(ConsoleErrorEvent $event)
+    public function onConsoleError()
     {
         $this->publisher->discard();
     }
