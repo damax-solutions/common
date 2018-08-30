@@ -1,0 +1,38 @@
+parameters:
+    locale: 'en'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Controller
+
+    Sample\Controller\:
+        resource: '../src/Controller'
+        tags: [ controller.service_arguments ]
+
+    # Doctrine
+
+    Sample\Doctrine\Orm\:
+        resource: '../src/Doctrine/Orm'
+
+    Sample\Doctrine\DataFixtures\:
+        resource: '../src/Doctrine/DataFixtures'
+        tags: [ doctrine.fixture.orm ]
+
+    # Application
+
+    Sample\Application\Service\:
+        resource: '../src/Application/Service'
+
+    Sample\Application\Dto\Assembler: ~
+
+    # Domain
+
+    Sample\Domain\Model\AuthorRepository: '@Sample\Doctrine\Orm\AuthorRepository'
+    Sample\Domain\Model\BookRepository:   '@Sample\Doctrine\Orm\BookRepository'
+
+    Sample\Domain\Model\IdGenerator:
+        class: Sample\RamseyUuid\UuidIdGenerator

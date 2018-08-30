@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity table="book" name="Sample\Domain\Model\Book" change-tracking-policy="DEFERRED_EXPLICIT">
+        <id name="id" type="uuid">
+            <generator strategy="NONE" />
+        </id>
+
+        <field name="authorId" type="uuid" />
+        <field name="title" />
+        <field name="createdAt" type="datetime" />
+    </entity>
+
+</doctrine-mapping>
