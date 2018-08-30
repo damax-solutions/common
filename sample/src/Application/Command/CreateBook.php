@@ -4,26 +4,19 @@ declare(strict_types=1);
 
 namespace App\Application\Command;
 
-use App\Domain\Model\AuthorId;
+use App\Application\Dto\BookCreationDto;
 
 final class CreateBook
 {
-    private $authorId;
-    private $title;
+    private $book;
 
-    public function __construct(string $authorId, string $title)
+    public function __construct(BookCreationDto $book)
     {
-        $this->authorId = $authorId;
-        $this->title = $title;
+        $this->book = $book;
     }
 
-    public function authorId(): AuthorId
+    public function book(): BookCreationDto
     {
-        return AuthorId::fromString($this->authorId);
-    }
-
-    public function title(): string
-    {
-        return $this->title;
+        return $this->book;
     }
 }

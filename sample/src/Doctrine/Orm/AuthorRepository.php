@@ -23,7 +23,7 @@ final class AuthorRepository implements AuthorRepositoryInterface
     public function byId(AuthorId $id): ?Author
     {
         /** @var Author $author */
-        $author = $this->em->find($this->className, (string) $id);
+        $author = $this->em->find($this->className, $id);
 
         return $author;
     }

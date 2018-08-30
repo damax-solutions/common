@@ -42,10 +42,6 @@ final class BookFixtures extends Fixture implements OrderedFixtureInterface
                 'author' => 'shakespeare',
             ],
             [
-                'title' => 'Hamlet',
-                'author' => 'shakespeare',
-            ],
-            [
                 'title' => 'Julius Caesar',
                 'author' => 'shakespeare',
             ],
@@ -75,6 +71,30 @@ final class BookFixtures extends Fixture implements OrderedFixtureInterface
             ],
             [
                 'title' => 'Troilus and Cressida',
+                'author' => 'shakespeare',
+            ],
+            [
+                'title' => 'All\'s Well That Ends Well',
+                'author' => 'shakespeare',
+            ],
+            [
+                'title' => 'As You Like It',
+                'author' => 'shakespeare',
+            ],
+            [
+                'title' => 'The Comedy of Errors',
+                'author' => 'shakespeare',
+            ],
+            [
+                'title' => 'Cymbeline',
+                'author' => 'shakespeare',
+            ],
+            [
+                'title' => 'Love\'s Labour\'s Lost',
+                'author' => 'shakespeare',
+            ],
+            [
+                'title' => 'Measure for Measure',
                 'author' => 'shakespeare',
             ],
 

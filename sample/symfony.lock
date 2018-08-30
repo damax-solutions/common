@@ -80,6 +80,9 @@
     "exsyst/swagger": {
         "version": "v0.4.1"
     },
+    "fig/link-util": {
+        "version": "1.0.0"
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -107,6 +110,9 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "pagerfanta/pagerfanta": {
+        "version": "v2.0.1"
+    },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
@@ -123,6 +129,9 @@
         "version": "1.0.1"
     },
     "psr/container": {
+        "version": "1.0.0"
+    },
+    "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
@@ -289,6 +298,9 @@
             "version": "4.1",
             "ref": "0cdc982334f45d554957a6167e030482795bf9d7"
         }
+    },
+    "symfony/web-link": {
+        "version": "v4.1.4"
     },
     "symfony/web-server-bundle": {
         "version": "3.3",

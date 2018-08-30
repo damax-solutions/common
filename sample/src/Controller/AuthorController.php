@@ -59,7 +59,7 @@ final class AuthorController
      *     )
      * )
      *
-     * @Route("/{id}", methods={"GET"}, name="author_view")
+     * @Route("/{id}", methods={"GET"})
      * @Serialize()
      *
      * @throws NotFoundHttpException

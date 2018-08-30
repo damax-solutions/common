@@ -13,5 +13,10 @@ final class BookCreationDto
     /**
      * @var string
      */
+    public $authorId;
+
+    /**
+     * @var string
+     */
     public $title;
 }

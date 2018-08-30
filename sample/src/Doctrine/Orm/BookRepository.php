@@ -26,7 +26,7 @@ final class BookRepository implements BookRepositoryInterface
     public function byId(BookId $id): ?Book
     {
         /** @var Book $book */
-        $book = $this->em->find($this->className, (string) $id);
+        $book = $this->em->find($this->className, $id);
 
         return $book;
     }
@@ -42,7 +42,7 @@ final class BookRepository implements BookRepositoryInterface
         $qb = $this->createQueryBuilder('b')->orderBy('b.createdAt', 'DESC');
 
         if ($authorId) {
-            $qb->where('b.authorId', ':author_id')->setParameter('author_id', $authorId);
+            $qb->where('b.authorId = :author_id')->setParameter('author_id', $authorId);
         }
 
         return new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
