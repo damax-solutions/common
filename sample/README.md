@@ -4,6 +4,12 @@ Check [this document](../doc/development.md) how to build Docker image.
 
 ## Installation
 
+Install dependencies:
+
+```bash
+$ docker run --rm -v $(pwd):/app -w /app damax-common composer install
+```
+
 Create schema:
 
 ```bash

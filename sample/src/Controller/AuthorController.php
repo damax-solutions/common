@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Sample\Controller;
+namespace App\Controller;
 
+use App\Application\Dto\AuthorDto;
+use App\Application\Exception\AuthorNotFound;
+use App\Application\Service\AuthorService;
 use Damax\Common\Bridge\Symfony\Bundle\Annotation\Serialize;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Sample\Application\Dto\AuthorDto;
-use Sample\Application\Exception\AuthorNotFound;
-use Sample\Application\Service\AuthorService;
 use Swagger\Annotations as OpenApi;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;

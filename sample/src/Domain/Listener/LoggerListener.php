@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sample\Domain\Listener;
+namespace App\Domain\Listener;
 
+use App\Domain\Event\BookCreated;
 use Psr\Log\LoggerInterface;
-use Sample\Domain\Event\BookCreated;
 
 final class LoggerListener
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sample\RamseyUuid;
+namespace App\RamseyUuid;
 
+use App\Domain\Model\AuthorId;
+use App\Domain\Model\BookId;
+use App\Domain\Model\IdGenerator;
 use Ramsey\Uuid\Uuid;
-use Sample\Domain\Model\AuthorId;
-use Sample\Domain\Model\BookId;
-use Sample\Domain\Model\IdGenerator;
 
 final class UuidIdGenerator implements IdGenerator
 {

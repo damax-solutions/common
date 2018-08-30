@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sample\Application\Dto;
+namespace App\Application\Dto;
 
-use Sample\Domain\Model\Author;
-use Sample\Domain\Model\Book;
+use App\Domain\Model\Author;
+use App\Domain\Model\Book;
 
 final class Assembler
 {

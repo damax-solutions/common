@@ -14,5 +14,5 @@ doctrine:
             sample:
                 type: xml
                 dir: '%kernel.project_dir%/config/doctrine'
-                prefix: Sample\Domain\Model
+                prefix: App\Domain\Model
                 is_bundle: false

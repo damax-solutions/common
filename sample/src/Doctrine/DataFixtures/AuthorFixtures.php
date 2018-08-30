@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Sample\Doctrine\DataFixtures;
+namespace App\Doctrine\DataFixtures;
 
+use App\Domain\Model\Author;
+use App\Domain\Model\IdGenerator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sample\Domain\Model\Author;
-use Sample\Domain\Model\IdGenerator;
 
 final class AuthorFixtures extends Fixture implements OrderedFixtureInterface
 {

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Sample\Doctrine\Orm;
+namespace App\Doctrine\Orm;
 
+use App\Domain\Model\AuthorId;
+use App\Domain\Model\Book;
+use App\Domain\Model\BookId;
+use App\Domain\Model\BookRepository as BookRepositoryInterface;
 use Damax\Common\Doctrine\Orm\OrmRepositoryTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Sample\Domain\Model\AuthorId;
-use Sample\Domain\Model\Book;
-use Sample\Domain\Model\BookId;
-use Sample\Domain\Model\BookRepository as BookRepositoryInterface;
 
 final class BookRepository implements BookRepositoryInterface
 {

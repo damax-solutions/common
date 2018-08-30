@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Sample\Application\Command;
+namespace App\Application\Command;
 
-use Sample\Domain\Model\AuthorId;
+use App\Domain\Model\AuthorId;
 
 final class CreateBook
 {

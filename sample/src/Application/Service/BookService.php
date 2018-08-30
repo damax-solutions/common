@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Sample\Application\Service;
+namespace App\Application\Service;
 
+use App\Application\Command\CreateBook;
+use App\Application\Dto\Assembler;
+use App\Application\Dto\BookDto;
+use App\Application\Exception\BookNotFound;
+use App\Domain\Model\AuthorId;
+use App\Domain\Model\Book;
+use App\Domain\Model\BookId;
+use App\Domain\Model\BookRepository;
+use App\Domain\Model\IdGenerator;
 use Damax\Common\Pagerfanta\CallableDecoratorAdapter;
 use Pagerfanta\Pagerfanta;
-use Sample\Application\Command\CreateBook;
-use Sample\Application\Dto\Assembler;
-use Sample\Application\Dto\BookDto;
-use Sample\Application\Exception\BookNotFound;
-use Sample\Domain\Model\AuthorId;
-use Sample\Domain\Model\Book;
-use Sample\Domain\Model\BookId;
-use Sample\Domain\Model\BookRepository;
-use Sample\Domain\Model\IdGenerator;
 
 final class BookService
 {

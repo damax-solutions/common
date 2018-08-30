@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Sample\Domain\Model;
+namespace App\Domain\Model;
 
+use App\Domain\Event\BookCreated;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Sample\Domain\Event\BookCreated;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
 

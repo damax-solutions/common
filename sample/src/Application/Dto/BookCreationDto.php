@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sample\Application\Dto;
+namespace App\Application\Dto;
 
 use Damax\Common\Application\AsArrayTrait;
 

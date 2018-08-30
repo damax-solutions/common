@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Sample\Doctrine\Orm;
+namespace App\Doctrine\Orm;
 
+use App\Domain\Model\Author;
+use App\Domain\Model\AuthorId;
+use App\Domain\Model\AuthorRepository as AuthorRepositoryInterface;
 use Damax\Common\Doctrine\Orm\OrmRepositoryTrait;
 use Doctrine\ORM\EntityManagerInterface;
-use Sample\Domain\Model\Author;
-use Sample\Domain\Model\AuthorId;
-use Sample\Domain\Model\AuthorRepository as AuthorRepositoryInterface;
 
 final class AuthorRepository implements AuthorRepositoryInterface
 {

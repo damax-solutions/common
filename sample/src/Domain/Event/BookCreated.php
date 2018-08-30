@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sample\Domain\Event;
+namespace App\Domain\Event;
 
+use App\Domain\Model\AuthorId;
+use App\Domain\Model\BookId;
 use DateTimeInterface;
 use JsonSerializable;
-use Sample\Domain\Model\AuthorId;
-use Sample\Domain\Model\BookId;
 
 final class BookCreated implements JsonSerializable
 {

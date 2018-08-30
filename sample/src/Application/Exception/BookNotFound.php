@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sample\Application\Exception;
+namespace App\Application\Exception;
 
+use App\Domain\Model\BookId;
 use RuntimeException;
-use Sample\Domain\Model\BookId;
 
 final class BookNotFound extends RuntimeException
 {

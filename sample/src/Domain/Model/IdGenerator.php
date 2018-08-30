@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sample\Domain\Model;
+namespace App\Domain\Model;
 
 interface IdGenerator
 {

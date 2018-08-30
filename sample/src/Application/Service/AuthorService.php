@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Sample\Application\Service;
+namespace App\Application\Service;
 
-use Sample\Application\Dto\Assembler;
-use Sample\Application\Dto\AuthorDto;
-use Sample\Application\Exception\AuthorNotFound;
-use Sample\Domain\Model\AuthorId;
-use Sample\Domain\Model\AuthorRepository;
+use App\Application\Dto\Assembler;
+use App\Application\Dto\AuthorDto;
+use App\Application\Exception\AuthorNotFound;
+use App\Domain\Model\AuthorId;
+use App\Domain\Model\AuthorRepository;
 
 final class AuthorService
 {

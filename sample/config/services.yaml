@@ -9,30 +9,30 @@ services:
 
     # Controller
 
-    Sample\Controller\:
+    App\Controller\:
         resource: '../src/Controller'
         tags: [ controller.service_arguments ]
 
     # Doctrine
 
-    Sample\Doctrine\Orm\:
+    App\Doctrine\Orm\:
         resource: '../src/Doctrine/Orm'
 
-    Sample\Doctrine\DataFixtures\:
+    App\Doctrine\DataFixtures\:
         resource: '../src/Doctrine/DataFixtures'
         tags: [ doctrine.fixture.orm ]
 
     # Application
 
-    Sample\Application\Service\:
+    App\Application\Service\:
         resource: '../src/Application/Service'
 
-    Sample\Application\Dto\Assembler: ~
+    App\Application\Dto\Assembler: ~
 
     # Domain
 
-    Sample\Domain\Model\AuthorRepository: '@Sample\Doctrine\Orm\AuthorRepository'
-    Sample\Domain\Model\BookRepository:   '@Sample\Doctrine\Orm\BookRepository'
+    App\Domain\Model\AuthorRepository: '@App\Doctrine\Orm\AuthorRepository'
+    App\Domain\Model\BookRepository:   '@App\Doctrine\Orm\BookRepository'
 
-    Sample\Domain\Model\IdGenerator:
-        class: Sample\RamseyUuid\UuidIdGenerator
+    App\Domain\Model\IdGenerator:
+        class: App\RamseyUuid\UuidIdGenerator
