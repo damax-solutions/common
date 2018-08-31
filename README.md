@@ -4,17 +4,11 @@
 
 Utilities and helpers for building DDD apps and APIs. Provides integration with [Symfony Framework](https://github.com/symfony/symfony).
 
-Check out the [sample application](sample) for inspiration.
-
 ## Description
 
 A set of tools to assist in building DDD-ish applications. It favours pragmatism over purity.
 
-Recipes:
-
-- one
-- two
-- three
+Check out the [sample application](sample) for inspiration.
 
 ## Contribute
 
