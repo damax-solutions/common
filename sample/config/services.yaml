@@ -13,6 +13,18 @@ services:
         resource: '../src/Controller'
         tags: [ controller.service_arguments ]
 
+    # Serializer
+
+    app.normalizer.author_id:
+        class: Damax\Common\Bridge\Symfony\Serializer\EntityIdNormalizer
+        arguments: [ 'App\Domain\Model\AuthorId' ]
+        tags: [ serializer.normalizer ]
+
+    app.normalizer.book_id:
+        class: Damax\Common\Bridge\Symfony\Serializer\EntityIdNormalizer
+        arguments: [ 'App\Domain\Model\BookId' ]
+        tags: [ serializer.normalizer ]
+
     # Doctrine
 
     App\Doctrine\Orm\:
@@ -36,3 +48,8 @@ services:
 
     App\Domain\Model\IdGenerator:
         class: App\RamseyUuid\UuidIdGenerator
+
+    App\Domain\Listener\AuthorListener:
+        public: true
+        tags:
+            - { name: asynchronous_event_subscriber, subscribes_to: App\Domain\Event\BookCreated, method: onBookCreated }

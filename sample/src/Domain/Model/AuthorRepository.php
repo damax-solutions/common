@@ -10,6 +10,8 @@ interface AuthorRepository
 
     public function add(Author $author): void;
 
+    public function update(Author $author): void;
+
     /**
      * @return Author[]
      */

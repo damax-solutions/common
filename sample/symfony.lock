@@ -11,6 +11,9 @@
     "damax/common": {
         "version": "1.2.1"
     },
+    "damax/enqueue-simple-bus-queue-interop": {
+        "version": "0.3.2"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -77,6 +80,39 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "enqueue/async-event-dispatcher": {
+        "version": "0.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.7",
+            "ref": "9e937ccb79e08b978f91fb816d4e6d645813113a"
+        }
+    },
+    "enqueue/dbal": {
+        "version": "0.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.8",
+            "ref": "7b05df4d7e97874f719baa645ab8b6aafe203f9b"
+        }
+    },
+    "enqueue/enqueue": {
+        "version": "0.8.35"
+    },
+    "enqueue/enqueue-bundle": {
+        "version": "0.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.4",
+            "ref": "daaea0035c3abd612f71f0288d5c20197c3c34ad"
+        }
+    },
+    "enqueue/null": {
+        "version": "0.8.24"
+    },
     "exsyst/swagger": {
         "version": "v0.4.1"
     },
@@ -94,6 +130,15 @@
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "long-running/long-running": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.1",
+            "ref": "b661d2358dbaee7826b470522ec4cb6b948cc80a"
+        }
     },
     "nelmio/api-doc-bundle": {
         "version": "3.0",
@@ -140,6 +185,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "queue-interop/queue-interop": {
+        "version": "0.6.2"
+    },
     "ramsey/uuid": {
         "version": "3.8.0"
     },
@@ -161,8 +209,20 @@
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
     },
+    "simple-bus/asynchronous": {
+        "version": "v3.0.0"
+    },
+    "simple-bus/asynchronous-bundle": {
+        "version": "v3.0.3"
+    },
+    "simple-bus/doctrine-orm-bridge": {
+        "version": "v5.0.0"
+    },
     "simple-bus/message-bus": {
         "version": "v3.0.1"
+    },
+    "simple-bus/serialization": {
+        "version": "v3.0.0"
     },
     "simple-bus/symfony-bridge": {
         "version": "v5.1.2"

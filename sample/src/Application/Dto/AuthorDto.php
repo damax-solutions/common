@@ -15,4 +15,9 @@ final class AuthorDto
      * @var string
      */
     public $fullName;
+
+    /**
+     * @var int
+     */
+    public $booksCount;
 }

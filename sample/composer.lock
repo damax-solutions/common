@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca5be32e9a01ae0e94e888fcb3da6b14",
+    "content-hash": "1bce6638a1f5836eb45e5632c44eac1c",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -116,6 +116,54 @@
             ],
             "description": "Utilities and helpers for building DDD apps and APIs.",
             "time": "2018-08-20T14:05:17+00:00"
+        },
+        {
+            "name": "damax/enqueue-simple-bus-queue-interop",
+            "version": "0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lakiboy/enqueue-simple-bus-queue-interop.git",
+                "reference": "ea9a1b0a5605b5c801755f06c9191dbe193f4c5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lakiboy/enqueue-simple-bus-queue-interop/zipball/ea9a1b0a5605b5c801755f06c9191dbe193f4c5b",
+                "reference": "ea9a1b0a5605b5c801755f06c9191dbe193f4c5b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "queue-interop/queue-interop": "^0.6.1",
+                "simple-bus/asynchronous": "^3.0"
+            },
+            "require-dev": {
+                "enqueue/enqueue": "^0.8.29",
+                "enqueue/null": "^0.8.24",
+                "friendsofphp/php-cs-fixer": "^2.12",
+                "long-running/long-running": "^0.2.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^3.0",
+                "php-coveralls/php-coveralls": "^2.1",
+                "symfony/framework-bundle": "^4.1",
+                "symfony/phpunit-bridge": "^4.1",
+                "symfony/serializer": "^4.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Enqueue\\SimpleBus\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "SimpleBus integration with Queue Interop via Enqueue library.",
+            "time": "2018-07-21T12:02:49+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1268,6 +1316,333 @@
             "time": "2018-06-14T14:45:07+00:00"
         },
         {
+            "name": "enqueue/async-event-dispatcher",
+            "version": "0.8.24",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-enqueue/async-event-dispatcher.git",
+                "reference": "36902adf96e01a4db2311fd7896b9e5c96ed29de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-enqueue/async-event-dispatcher/zipball/36902adf96e01a4db2311fd7896b9e5c96ed29de",
+                "reference": "36902adf96e01a4db2311fd7896b9e5c96ed29de",
+                "shasum": ""
+            },
+            "require": {
+                "enqueue/enqueue": "^0.8@dev",
+                "php": ">=5.6",
+                "symfony/event-dispatcher": "^2.8|^3|^4"
+            },
+            "require-dev": {
+                "enqueue/fs": "^0.8@dev",
+                "enqueue/null": "^0.8@dev",
+                "enqueue/test": "^0.8@dev",
+                "phpunit/phpunit": "~5.5",
+                "symfony/config": "^2.8|^3|^4",
+                "symfony/dependency-injection": "^2.8|^3|^4",
+                "symfony/filesystem": "^2.8|^3|^4",
+                "symfony/http-kernel": "^2.8|^3|^4"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "^2.8|^3|^4 If you'd like to use async event dispatcher container extension."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Enqueue\\AsyncEventDispatcher\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony async event dispatcher",
+            "homepage": "https://enqueue.forma-pro.com/",
+            "keywords": [
+                "async event",
+                "event dispatcher",
+                "messaging",
+                "queue"
+            ],
+            "time": "2018-03-23T10:52:55+00:00"
+        },
+        {
+            "name": "enqueue/dbal",
+            "version": "0.8.32",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-enqueue/dbal.git",
+                "reference": "7a90c9f09548c45ade64f7dcf31736349271c0e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-enqueue/dbal/zipball/7a90c9f09548c45ade64f7dcf31736349271c0e1",
+                "reference": "7a90c9f09548c45ade64f7dcf31736349271c0e1",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.5",
+                "php": ">=5.6",
+                "queue-interop/queue-interop": "^0.6@dev|^1.0.0-alpha1"
+            },
+            "require-dev": {
+                "enqueue/enqueue": "^0.8@dev",
+                "enqueue/null": "^0.8@dev",
+                "enqueue/test": "^0.8@dev",
+                "phpunit/phpunit": "~5.4.0",
+                "queue-interop/queue-spec": "^0.5.5@dev",
+                "symfony/config": "^2.8|^3|^4",
+                "symfony/dependency-injection": "^2.8|^3|^4"
+            },
+            "suggest": {
+                "enqueue/enqueue": "If you'd like to use advanced features like Client abstract layer or Symfony integration features"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Enqueue\\Dbal\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Message Queue Doctrine DBAL Transport",
+            "homepage": "https://enqueue.forma-pro.com/",
+            "keywords": [
+                "dbal",
+                "doctrine",
+                "messaging",
+                "queue"
+            ],
+            "time": "2018-06-04T15:11:20+00:00"
+        },
+        {
+            "name": "enqueue/enqueue",
+            "version": "0.8.35",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-enqueue/enqueue.git",
+                "reference": "6b4136c7c0e63e57171431a3472c2a5dcf9d0787"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/6b4136c7c0e63e57171431a3472c2a5dcf9d0787",
+                "reference": "6b4136c7c0e63e57171431a3472c2a5dcf9d0787",
+                "shasum": ""
+            },
+            "require": {
+                "enqueue/null": "^0.8@dev",
+                "php": ">=5.6",
+                "psr/log": "^1",
+                "queue-interop/queue-interop": "^0.6.2@dev",
+                "ramsey/uuid": "^2|^3.5"
+            },
+            "require-dev": {
+                "empi89/php-amqp-stubs": "*@dev",
+                "enqueue/amqp-bunny": "^0.8@dev",
+                "enqueue/amqp-ext": "^0.8@dev",
+                "enqueue/amqp-lib": "^0.8@dev",
+                "enqueue/dbal": "^0.8@dev",
+                "enqueue/fs": "^0.8@dev",
+                "enqueue/gearman": "^0.8@dev",
+                "enqueue/gps": "^0.8@dev",
+                "enqueue/mongodb": "^0.8@dev",
+                "enqueue/pheanstalk": "^0.8@dev",
+                "enqueue/rdkafka": "^0.8@dev",
+                "enqueue/redis": "^0.8@dev",
+                "enqueue/simple-client": "^0.8@dev",
+                "enqueue/sqs": "^0.8@dev",
+                "enqueue/stomp": "^0.8@dev",
+                "enqueue/test": "^0.8@dev",
+                "phpunit/phpunit": "~5.5",
+                "symfony/config": "^2.8|^3|^4",
+                "symfony/console": "^2.8|^3|^4",
+                "symfony/dependency-injection": "^2.8|^3|^4",
+                "symfony/event-dispatcher": "^2.8|^3|^4",
+                "symfony/http-kernel": "^2.8|^3|^4"
+            },
+            "suggest": {
+                "enqueue/amqp-ext": "AMQP transport (based on php extension)",
+                "enqueue/dbal": "Doctrine DBAL transport",
+                "enqueue/fs": "Filesystem transport",
+                "enqueue/redis": "Redis transport",
+                "enqueue/sqs": "Amazon AWS SQS transport",
+                "enqueue/stomp": "STOMP transport",
+                "symfony/config": "^2.8|^3|^4",
+                "symfony/console": "^2.8|^3|^4 If you want to use li commands",
+                "symfony/dependency-injection": "^2.8|^3|^4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Enqueue\\": ""
+                },
+                "files": [
+                    "functions_include.php"
+                ],
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Message Queue Library",
+            "homepage": "https://enqueue.forma-pro.com/",
+            "keywords": [
+                "AMQP",
+                "messaging",
+                "queue",
+                "rabbitmq"
+            ],
+            "time": "2018-08-06T19:26:00+00:00"
+        },
+        {
+            "name": "enqueue/enqueue-bundle",
+            "version": "0.8.35",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-enqueue/enqueue-bundle.git",
+                "reference": "3992ba408590ed29cd16dce64e7c92abd99e2fa2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-enqueue/enqueue-bundle/zipball/3992ba408590ed29cd16dce64e7c92abd99e2fa2",
+                "reference": "3992ba408590ed29cd16dce64e7c92abd99e2fa2",
+                "shasum": ""
+            },
+            "require": {
+                "enqueue/async-event-dispatcher": "^0.8@dev",
+                "enqueue/enqueue": "^0.8.35@dev",
+                "enqueue/null": "^0.8@dev",
+                "php": ">=5.6",
+                "symfony/framework-bundle": "^2.8|^3|^4"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.2",
+                "enqueue/amqp-bunny": "^0.8@dev",
+                "enqueue/amqp-ext": "^0.8@dev",
+                "enqueue/amqp-lib": "^0.8@dev",
+                "enqueue/dbal": "^0.8@dev",
+                "enqueue/fs": "^0.8@dev",
+                "enqueue/gps": "^0.8@dev",
+                "enqueue/job-queue": "^0.8@dev",
+                "enqueue/redis": "^0.8@dev",
+                "enqueue/sqs": "^0.8@dev",
+                "enqueue/stomp": "^0.8@dev",
+                "enqueue/test": "^0.8@dev",
+                "php-amqplib/php-amqplib": "^2.7@dev",
+                "phpunit/phpunit": "~5.5",
+                "symfony/browser-kit": "^2.8|^3|^4",
+                "symfony/expression-language": "^2.8|^3|^4",
+                "symfony/monolog-bundle": "^2.8|^3|^4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Enqueue\\Bundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Message Queue Bundle",
+            "homepage": "https://enqueue.forma-pro.com/",
+            "keywords": [
+                "AMQP",
+                "messaging",
+                "queue",
+                "rabbitmq"
+            ],
+            "time": "2018-08-06T19:26:00+00:00"
+        },
+        {
+            "name": "enqueue/null",
+            "version": "0.8.24",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-enqueue/null.git",
+                "reference": "e75270a99e6d65a2b7d739fa6c6131338d85acee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-enqueue/null/zipball/e75270a99e6d65a2b7d739fa6c6131338d85acee",
+                "reference": "e75270a99e6d65a2b7d739fa6c6131338d85acee",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "queue-interop/queue-interop": "^0.6@dev|^1.0.0-alpha1"
+            },
+            "require-dev": {
+                "enqueue/enqueue": "^0.8@dev",
+                "enqueue/test": "^0.8@dev",
+                "phpunit/phpunit": "~5.5",
+                "queue-interop/queue-spec": "^0.5.3@dev",
+                "symfony/config": "^2.8|^3|^4",
+                "symfony/dependency-injection": "^2.8|^3|^4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Enqueue\\Null\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Enqueue Null transport",
+            "homepage": "https://enqueue.forma-pro.com/",
+            "keywords": [
+                "messaging",
+                "queue",
+                "testing"
+            ],
+            "time": "2018-03-23T10:52:55+00:00"
+        },
+        {
             "name": "exsyst/swagger",
             "version": "v0.4.1",
             "source": {
@@ -1409,6 +1784,58 @@
                 "sql"
             ],
             "time": "2014-01-12T16:20:24+00:00"
+        },
+        {
+            "name": "long-running/long-running",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LongRunning/LongRunning.git",
+                "reference": "e7a173f79fa47e5b301638b243e2bd3a6c2847dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LongRunning/LongRunning/zipball/e7a173f79fa47e5b301638b243e2bd3a6c2847dd",
+                "reference": "e7a173f79fa47e5b301638b243e2bd3a6c2847dd",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.0",
+                "doctrine/orm": "~2.3",
+                "phpunit/phpunit": "~4.0",
+                "sentry/sentry-symfony": "~1.0",
+                "simple-bus/rabbitmq-bundle-bridge": "~2.1",
+                "symfony/framework-bundle": "~2.3 || ~3.0",
+                "symfony/monolog-bundle": "~2.3",
+                "symfony/swiftmailer-bundle": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LongRunning\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Noback",
+                    "email": "matthiasnoback@gmail.com",
+                    "homepage": "http://php-and-symfony.matthiasnoback.nl"
+                },
+                {
+                    "name": "Cliff Odijk",
+                    "email": "cliff@jcid.nl"
+                }
+            ],
+            "description": "Tools for working with long-running processes",
+            "homepage": "http://github.com/LongRunning/LongRunning",
+            "time": "2017-12-05T09:47:21+00:00"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -2071,6 +2498,49 @@
             "time": "2017-10-23T01:57:42+00:00"
         },
         {
+            "name": "queue-interop/queue-interop",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/queue-interop/queue-interop.git",
+                "reference": "950c8083ff328751843080f25266dec0db624ddb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/queue-interop/queue-interop/zipball/950c8083ff328751843080f25266dec0db624ddb",
+                "reference": "950c8083ff328751843080f25266dec0db624ddb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Interop\\Queue\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Promoting the interoperability of MQs objects. Based on Java JMS",
+            "homepage": "https://github.com/queue-interop/queue-interop",
+            "keywords": [
+                "MQ",
+                "jms",
+                "message queue",
+                "messaging",
+                "queue"
+            ],
+            "time": "2018-08-05T12:16:04+00:00"
+        },
+        {
             "name": "ramsey/uuid",
             "version": "3.8.0",
             "source": {
@@ -2281,6 +2751,179 @@
             "time": "2018-05-12T09:37:42+00:00"
         },
         {
+            "name": "simple-bus/asynchronous",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SimpleBus/Asynchronous.git",
+                "reference": "6edf8d9efa9ab203f121d75cf72de453be4a3a66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SimpleBus/Asynchronous/zipball/6edf8d9efa9ab203f121d75cf72de453be4a3a66",
+                "reference": "6edf8d9efa9ab203f121d75cf72de453be4a3a66",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "~2.0",
+                "php": "^5.6 || ^7.0",
+                "psr/log": "~1.0",
+                "simple-bus/message-bus": "~3.0",
+                "simple-bus/serialization": "~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SimpleBus\\Asynchronous\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Noback",
+                    "email": "matthiasnoback@gmail.com",
+                    "homepage": "http://php-and-symfony.matthiasnoback.nl"
+                },
+                {
+                    "name": "Cliff Odijk",
+                    "email": "cliff@jcid.nl"
+                }
+            ],
+            "description": "Generic classes and interfaces for asynchronous messaging using SimpleBus",
+            "homepage": "http://github.com/SimpleBus/Asynchronous",
+            "keywords": [
+                "asynchronous",
+                "command bus",
+                "event bus",
+                "messaging"
+            ],
+            "time": "2017-08-28T08:09:42+00:00"
+        },
+        {
+            "name": "simple-bus/asynchronous-bundle",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SimpleBus/AsynchronousBundle.git",
+                "reference": "ae6bb765229289f3cbdc9d55382391e5933f051b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SimpleBus/AsynchronousBundle/zipball/ae6bb765229289f3cbdc9d55382391e5933f051b",
+                "reference": "ae6bb765229289f3cbdc9d55382391e5933f051b",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "~2.0",
+                "php": "^5.6 || ^7.0",
+                "simple-bus/asynchronous": "~3.0",
+                "simple-bus/message-bus": "~3.0",
+                "simple-bus/symfony-bridge": "~5.0",
+                "symfony/framework-bundle": "~2.0 || ~3.0 || ~4.0"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-dependency-injection-test": "~1.2 || ~2.0",
+                "phpunit/phpunit": "^5.7 || ^6.0",
+                "symfony/monolog-bundle": "~2.3 || ~3.0"
+            },
+            "suggest": {
+                "symfony/monolog-bundle": "For logging messages"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "SimpleBus\\AsynchronousBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Noback",
+                    "email": "matthiasnoback@gmail.com",
+                    "homepage": "http://php-and-symfony.matthiasnoback.nl"
+                },
+                {
+                    "name": "Cliff Odijk",
+                    "email": "cliff@jcid.nl"
+                }
+            ],
+            "description": "Symfony bundle for using SimpleBus/Asynchronous",
+            "homepage": "http://github.com/SimpleBus/AsynchronousBundle",
+            "keywords": [
+                "asynchronous",
+                "command bus",
+                "event bus",
+                "message",
+                "message bus"
+            ],
+            "time": "2017-12-03T17:59:27+00:00"
+        },
+        {
+            "name": "simple-bus/doctrine-orm-bridge",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SimpleBus/DoctrineORMBridge.git",
+                "reference": "a7dac8362bb9f2cd77fbacfa53888f1b8a0aae3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SimpleBus/DoctrineORMBridge/zipball/a7dac8362bb9f2cd77fbacfa53888f1b8a0aae3c",
+                "reference": "a7dac8362bb9f2cd77fbacfa53888f1b8a0aae3c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "~2.2",
+                "php": "^5.6 || ^7.0",
+                "simple-bus/message-bus": "~3.0"
+            },
+            "require-dev": {
+                "matthiasnoback/doctrine-orm-test-service-provider": "~2.0",
+                "phpunit/phpunit": "~4.5"
+            },
+            "suggest": {
+                "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SimpleBus\\DoctrineORMBridge\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Noback",
+                    "email": "matthiasnoback@gmail.com",
+                    "homepage": "http://php-and-symfony.matthiasnoback.nl"
+                },
+                {
+                    "name": "Cliff Odijk",
+                    "email": "cliff@jcid.nl"
+                }
+            ],
+            "description": "Doctrine ORM bridge for using command and event buses",
+            "homepage": "http://github.com/SimpleBus/DoctrineORMBridge",
+            "keywords": [
+                "command bus",
+                "doctrine",
+                "event bus"
+            ],
+            "time": "2017-08-28T09:32:44+00:00"
+        },
+        {
             "name": "simple-bus/message-bus",
             "version": "v3.0.1",
             "source": {
@@ -2332,6 +2975,57 @@
                 "message bus"
             ],
             "time": "2017-09-29T15:36:01+00:00"
+        },
+        {
+            "name": "simple-bus/serialization",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SimpleBus/Serialization.git",
+                "reference": "f51dc365d64956fb2ba0c2b479a04aa51fc8f378"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SimpleBus/Serialization/zipball/f51dc365d64956fb2ba0c2b479a04aa51fc8f378",
+                "reference": "f51dc365d64956fb2ba0c2b479a04aa51fc8f378",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "~2.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SimpleBus\\Serialization\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Noback",
+                    "email": "matthiasnoback@gmail.com",
+                    "homepage": "http://php-and-symfony.matthiasnoback.nl"
+                },
+                {
+                    "name": "Cliff Odijk",
+                    "email": "cliff@jcid.nl"
+                }
+            ],
+            "description": "Generic classes and interfaces for serializing messages",
+            "homepage": "http://github.com/SimpleBus/Serialization",
+            "keywords": [
+                "SimpleBus",
+                "messages",
+                "serialization"
+            ],
+            "time": "2017-08-28T06:39:40+00:00"
         },
         {
             "name": "simple-bus/symfony-bridge",

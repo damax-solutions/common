@@ -27,6 +27,7 @@ final class Assembler
 
         $dto->id = (string) $author->id();
         $dto->fullName = $author->fullName();
+        $dto->booksCount = $author->booksCount();
 
         return $dto;
     }

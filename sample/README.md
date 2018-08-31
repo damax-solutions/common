@@ -16,10 +16,22 @@ Create schema:
 $ docker run --rm -v $(pwd):/app -w /app damax-common ./bin/console doctrine:schema:update --force
 ```
 
+Create table for enqueue:
+
+```bash
+$ docker run --rm -v $(pwd):/app -w /app damax-common ./bin/console enqueue:setup-broker
+```
+
 Import fixtures:
 
 ```bash
 $ docker run --rm -v $(pwd):/app -w /app damax-common ./bin/console doctrine:fixture:load
+```
+
+Consume messages:
+
+```bash
+$ docker run --rm -v $(pwd):/app -w /app damax-common ./bin/console enqueue:transport:consume enqueue.simple_bus.events_processor --queue=domain_events --message-limit=25
 ```
 
 ## Usage

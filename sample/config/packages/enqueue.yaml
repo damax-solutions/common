@@ -1,0 +1,7 @@
+enqueue:
+    transport:
+        default:
+            alias: dbal
+        dbal:
+            dbal_connection_name: default
+    client: ~

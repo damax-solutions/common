@@ -8,6 +8,7 @@ class Author
 {
     private $id;
     private $fullName;
+    private $booksCount = 0;
 
     public function __construct(AuthorId $id, string $fullName)
     {
@@ -23,5 +24,15 @@ class Author
     public function fullName(): string
     {
         return $this->fullName;
+    }
+
+    public function booksCount(): int
+    {
+        return $this->booksCount;
+    }
+
+    public function incrementBooksCount(): void
+    {
+        ++$this->booksCount;
     }
 }

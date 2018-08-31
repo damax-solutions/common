@@ -1,0 +1,2 @@
+enqueue_simple_bus:
+    events: domain_events

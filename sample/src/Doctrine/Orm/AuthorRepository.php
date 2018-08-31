@@ -34,6 +34,12 @@ final class AuthorRepository implements AuthorRepositoryInterface
         $this->em->flush($author);
     }
 
+    public function update(Author $author): void
+    {
+        $this->em->persist($author);
+        $this->em->flush($author);
+    }
+
     public function all(): array
     {
         return $this->createQueryBuilder('a')->getQuery()->getResult();
