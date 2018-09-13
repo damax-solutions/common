@@ -39,7 +39,7 @@ $ docker run --rm -v $(pwd):/app -w /app damax-common ./bin/console enqueue:tran
 Run built-in _HTTP_ server:
 
 ```bash
-$ docker run --rm -v $(pwd):/app -w /app -p 8080:8080 damax-common ./bin/console server:run *:8080
+$ docker run --rm -v $(pwd):/app -w /app -p 8080:8080 damax-common ./bin/console --env=dev server:run *:8080
 ```
 
 Browse _API_ docs:

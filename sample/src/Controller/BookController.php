@@ -57,7 +57,7 @@ final class BookController
      * @Route("", methods={"GET"})
      * @Serialize()
      */
-    public function listAction(Request $request): Pagerfanta
+    public function index(Request $request): Pagerfanta
     {
         return $this->service
             ->fetchRange($request->query->get('authorId'))
@@ -87,7 +87,7 @@ final class BookController
      *
      * @throws NotFoundHttpException
      */
-    public function viewAction(string $id): BookDto
+    public function view(string $id): BookDto
     {
         try {
             return $this->service->fetch($id);
@@ -117,7 +117,7 @@ final class BookController
      * @Deserialize(BookCreationDto::class, validate=true, param="book")
      * @Serialize()
      */
-    public function createAction(BookCreationDto $book): BookDto
+    public function create(BookCreationDto $book): BookDto
     {
         return $this->service->create(new CreateBook($book));
     }

@@ -39,7 +39,7 @@ final class AuthorController
      * @Route("", methods={"GET"})
      * @Serialize()
      */
-    public function listAction(): array
+    public function index(): array
     {
         return $this->service->fetchAll();
     }
@@ -64,7 +64,7 @@ final class AuthorController
      *
      * @throws NotFoundHttpException
      */
-    public function viewAction(string $id): AuthorDto
+    public function view(string $id): AuthorDto
     {
         try {
             return $this->service->fetch($id);
