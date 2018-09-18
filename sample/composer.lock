@@ -1317,7 +1317,7 @@
         },
         {
             "name": "enqueue/async-event-dispatcher",
-            "version": "0.8.24",
+            "version": "0.8.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/async-event-dispatcher.git",
@@ -1377,7 +1377,7 @@
         },
         {
             "name": "enqueue/dbal",
-            "version": "0.8.32",
+            "version": "0.8.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/dbal.git",
@@ -1436,16 +1436,16 @@
         },
         {
             "name": "enqueue/enqueue",
-            "version": "0.8.35",
+            "version": "0.8.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/enqueue.git",
-                "reference": "6b4136c7c0e63e57171431a3472c2a5dcf9d0787"
+                "reference": "b8944076eb43adb8ebfd03b5c4975b960c4fe949"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/6b4136c7c0e63e57171431a3472c2a5dcf9d0787",
-                "reference": "6b4136c7c0e63e57171431a3472c2a5dcf9d0787",
+                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/b8944076eb43adb8ebfd03b5c4975b960c4fe949",
+                "reference": "b8944076eb43adb8ebfd03b5c4975b960c4fe949",
                 "shasum": ""
             },
             "require": {
@@ -1519,20 +1519,20 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2018-08-06T19:26:00+00:00"
+            "time": "2018-08-22T12:39:02+00:00"
         },
         {
             "name": "enqueue/enqueue-bundle",
-            "version": "0.8.35",
+            "version": "0.8.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/enqueue-bundle.git",
-                "reference": "3992ba408590ed29cd16dce64e7c92abd99e2fa2"
+                "reference": "ada287130a27805998196063488ca8107d16cef7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-enqueue/enqueue-bundle/zipball/3992ba408590ed29cd16dce64e7c92abd99e2fa2",
-                "reference": "3992ba408590ed29cd16dce64e7c92abd99e2fa2",
+                "url": "https://api.github.com/repos/php-enqueue/enqueue-bundle/zipball/ada287130a27805998196063488ca8107d16cef7",
+                "reference": "ada287130a27805998196063488ca8107d16cef7",
                 "shasum": ""
             },
             "require": {
@@ -1587,11 +1587,11 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2018-08-06T19:26:00+00:00"
+            "time": "2018-08-08T15:15:17+00:00"
         },
         {
             "name": "enqueue/null",
-            "version": "0.8.24",
+            "version": "0.8.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/null.git",

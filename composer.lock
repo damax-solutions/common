@@ -126,16 +126,16 @@
         },
         {
             "name": "composer/xdebug-handler",
-            "version": "1.2.1",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "e37cbd80da64afe314c72de8d2d2fec0e40d9373"
+                "reference": "b8e9745fb9b06ea6664d8872c4505fb16df4611c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/e37cbd80da64afe314c72de8d2d2fec0e40d9373",
-                "reference": "e37cbd80da64afe314c72de8d2d2fec0e40d9373",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/b8e9745fb9b06ea6664d8872c4505fb16df4611c",
+                "reference": "b8e9745fb9b06ea6664d8872c4505fb16df4611c",
                 "shasum": ""
             },
             "require": {
@@ -166,7 +166,7 @@
                 "Xdebug",
                 "performance"
             ],
-            "time": "2018-08-23T12:00:19+00:00"
+            "time": "2018-08-31T19:07:57+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1026,16 +1026,16 @@
         },
         {
             "name": "enqueue/enqueue",
-            "version": "0.8.35",
+            "version": "0.8.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/enqueue.git",
-                "reference": "6b4136c7c0e63e57171431a3472c2a5dcf9d0787"
+                "reference": "b8944076eb43adb8ebfd03b5c4975b960c4fe949"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/6b4136c7c0e63e57171431a3472c2a5dcf9d0787",
-                "reference": "6b4136c7c0e63e57171431a3472c2a5dcf9d0787",
+                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/b8944076eb43adb8ebfd03b5c4975b960c4fe949",
+                "reference": "b8944076eb43adb8ebfd03b5c4975b960c4fe949",
                 "shasum": ""
             },
             "require": {
@@ -1109,11 +1109,11 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2018-08-06T19:26:00+00:00"
+            "time": "2018-08-22T12:39:02+00:00"
         },
         {
             "name": "enqueue/null",
-            "version": "0.8.24",
+            "version": "0.8.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/null.git",

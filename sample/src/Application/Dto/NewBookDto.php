@@ -7,7 +7,7 @@ namespace App\Application\Dto;
 use ArrayAccess;
 use Damax\Common\Application\AsArrayTrait;
 
-final class BookCreationDto implements ArrayAccess
+final class NewBookDto implements ArrayAccess
 {
     use AsArrayTrait;
 

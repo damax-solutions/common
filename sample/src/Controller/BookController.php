@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Application\Command\CreateBook;
-use App\Application\Dto\BookCreationDto;
 use App\Application\Dto\BookDto;
+use App\Application\Dto\NewBookDto;
 use App\Application\Exception\BookNotFound;
 use App\Application\Service\BookService;
 use Damax\Common\Bridge\Symfony\Bundle\Annotation\Deserialize;
@@ -104,7 +104,7 @@ final class BookController
      *         name="body",
      *         in="body",
      *         required=true,
-     *         @OpenApi\Schema(ref=@Model(type=BookCreationDto::class))
+     *         @OpenApi\Schema(ref=@Model(type=NewBookDto::class))
      *     ),
      *     @OpenApi\Response(
      *         response=201,
@@ -114,10 +114,10 @@ final class BookController
      * )
      *
      * @Route("", methods={"POST"})
-     * @Deserialize(BookCreationDto::class, validate=true, param="book")
+     * @Deserialize(NewBookDto::class, validate=true, param="book")
      * @Serialize()
      */
-    public function create(BookCreationDto $book): BookDto
+    public function create(NewBookDto $book): BookDto
     {
         return $this->service->create(new CreateBook($book));
     }
