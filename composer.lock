@@ -1026,16 +1026,16 @@
         },
         {
             "name": "enqueue/enqueue",
-            "version": "0.8.37",
+            "version": "0.8.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/enqueue.git",
-                "reference": "b8944076eb43adb8ebfd03b5c4975b960c4fe949"
+                "reference": "7d36b820727a42a79c54a593a9d3e9f6ffeecdf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/b8944076eb43adb8ebfd03b5c4975b960c4fe949",
-                "reference": "b8944076eb43adb8ebfd03b5c4975b960c4fe949",
+                "url": "https://api.github.com/repos/php-enqueue/enqueue/zipball/7d36b820727a42a79c54a593a9d3e9f6ffeecdf6",
+                "reference": "7d36b820727a42a79c54a593a9d3e9f6ffeecdf6",
                 "shasum": ""
             },
             "require": {
@@ -1109,11 +1109,11 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2018-08-22T12:39:02+00:00"
+            "time": "2018-09-18T13:30:59+00:00"
         },
         {
             "name": "enqueue/null",
-            "version": "0.8.38",
+            "version": "0.8.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-enqueue/null.git",
