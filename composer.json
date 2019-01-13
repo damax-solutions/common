@@ -34,9 +34,7 @@
   "scripts": {
     "cs": "php-cs-fixer fix",
     "test": "simple-phpunit",
-    "test-cc": "./bin/phpunit-coverage",
-    "test-ci": "simple-phpunit --coverage-clover=build/logs/clover.xml",
-    "test-publish": "php-coveralls"
+    "test-cc": "phpdbg -qrr ./vendor/bin/simple-phpunit --coverage-html=build/phpunit"
   },
   "config": {
     "sort-packages": true

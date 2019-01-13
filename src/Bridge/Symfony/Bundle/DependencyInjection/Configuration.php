@@ -12,9 +12,9 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('damax_common');
 
-        $rootNode = $treeBuilder->root('damax_common');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
                 ->append($this->listenersNode('listeners'))
