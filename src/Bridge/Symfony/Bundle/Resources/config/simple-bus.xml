@@ -16,5 +16,9 @@
             <tag name="enqueue.consumption.extension" priority="-512" />
         </service>
 
+        <service id="Damax\Common\Bridge\LongRunning\DomainEventsCleaner">
+            <tag name="long_running.cleaner" />
+        </service>
+
     </services>
 </container>

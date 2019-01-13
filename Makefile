@@ -9,6 +9,10 @@ install:
 		$(DOCKER_RUN) install
 .PHONY: install
 
+update:
+		$(DOCKER_RUN) update
+.PHONY: update
+
 cs:
 		$(DOCKER_RUN) run-script cs
 .PHONY: cs

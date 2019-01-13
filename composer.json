@@ -18,6 +18,7 @@
     "enqueue/enqueue": "^0.8.29",
     "friendsofphp/php-cs-fixer": "^2.10",
     "matthiasnoback/symfony-dependency-injection-test": "^3.0",
+    "long-running/long-running": "^0.3.1",
     "pagerfanta/pagerfanta": "^2.0",
     "php-coveralls/php-coveralls": "^2.1",
     "ramsey/uuid": "^3.7",
