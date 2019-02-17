@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+
+  composer:
+    image: prooph/composer:7.2
+    volumes:
+      - ".:/app"
+    working_dir: /app
+
+  app:
+    image: prooph/php:7.2-cli
+    volumes:
+      - ".:/app"
+    working_dir: /app
