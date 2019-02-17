@@ -1,6 +1,6 @@
 COMPOSER_RUNTIME = -e SYMFONY_PHPUNIT_VERSION=7.4
 
-DOCKER_RUN = docker run --rm -v $(PWD):/app -w /app $(COMPOSER_RUNTIME) composer
+DOCKER_RUN = docker run --rm -v $(PWD):/app -w /app $(COMPOSER_RUNTIME) prooph/composer:7.2
 
 all: install test
 .PHONY: all
