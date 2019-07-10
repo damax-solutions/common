@@ -49,7 +49,7 @@ class DeserializeListener implements EventSubscriberInterface
             return;
         }
 
-        $contentType = $request->getContentType() ?? $request->getRequestFormat(null);
+        $contentType = $request->getRequestFormat(null) ?? $request->getContentType();
         if (self::CONTENT_TYPE !== $contentType) {
             return;
         }
