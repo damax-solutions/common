@@ -1,7 +1,7 @@
 {% extends 'form_div_layout.html.twig' %}
 
 {% block form_row %}
-{% spaceless %}
+{% apply spaceless %}
     {% if compound %}
         {{ form_widget(form) }}
     {% else %}
@@ -10,11 +10,11 @@
             {{ form_errors(form) }}
         </div>
     {% endif %}
-{% endspaceless %}
+{% endapply %}
 {% endblock %}
 
 {% block form_widget_simple %}
-{% spaceless %}
+{% apply spaceless %}
     {% set attr = attr | merge({ class: 'input is-large' }) %}
 
     {% if label %}
@@ -22,7 +22,7 @@
     {% endif %}
 
     {{ parent() }}
-{% endspaceless %}
+{% endapply %}
 {% endblock %}
 
 {% block textarea_widget %}
@@ -36,17 +36,17 @@
 {% endblock %}
 
 {% block choice_widget_collapsed %}
-{% spaceless %}
+{% apply spaceless %}
     <div class="control">
         <div class="select is-large is-rounded is-fullwidth">
             {{ parent() }}
         </div>
     </div>
-{% endspaceless %}
+{% endapply %}
 {% endblock %}
 
 {% block checkbox_widget %}
-{% spaceless %}
+{% apply spaceless %}
     <div class="control">
         <label class="checkbox">
             {{ parent() }}
@@ -58,11 +58,11 @@
             {% endif %}
         </label>
     </div>
-{% endspaceless %}
+{% endapply %}
 {% endblock checkbox_widget %}
 
 {% block form_widget %}
-{% spaceless %}
+{% apply spaceless %}
     {% if compound %}
         {{ block('form_widget_compound') }}
     {% else %}
@@ -70,24 +70,24 @@
             {{ block('form_widget_simple') }}
         </div>
     {% endif %}
-{% endspaceless %}
+{% endapply %}
 {% endblock %}
 
 {% block form_widget_compound %}
-{% spaceless %}
+{% apply spaceless %}
     {% if form is rootform %}
         {{ form_errors(form) }}
     {% endif %}
 
     {{ block('form_rows') }}
     {{ form_rest(form) }}
-{% endspaceless %}
+{% endapply %}
 {% endblock %}
 
 {% block form_errors %}
-{% spaceless %}
+{% apply spaceless %}
     {% for error in errors %}
         <p class="help is-danger has-text-left">{{ error.message }}</p>
     {% endfor %}
-{% endspaceless %}
+{% endapply %}
 {% endblock %}
