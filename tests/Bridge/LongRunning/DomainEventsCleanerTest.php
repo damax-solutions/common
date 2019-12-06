@@ -21,7 +21,7 @@ class DomainEventsCleanerTest extends TestCase
      */
     private $cleaner;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->publisher = $this->createMock(EventPublisher::class);
         $this->cleaner = new DomainEventsCleaner($this->publisher);
@@ -30,7 +30,7 @@ class DomainEventsCleanerTest extends TestCase
     /**
      * @test
      */
-    public function it_publishes_domain_events()
+    public function it_publishes_domain_events(): void
     {
         $this->publisher
             ->expects($this->once())

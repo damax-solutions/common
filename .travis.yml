@@ -3,23 +3,23 @@ sudo: false
 language: php
 
 php:
-  - 7.1
   - 7.2
   - 7.3
+  - 7.4
 
 env:
   global:
-    - SYMFONY_PHPUNIT_VERSION=7.4
+    - SYMFONY_PHPUNIT_VERSION=8.3
     - SYMFONY_LOWEST=
 
 cache:
   directories:
     - $HOME/.composer/cache
 
-matrix:
-  include:
-    - php: 7.1
-      env: SYMFONY_LOWEST="3.4.*
+#matrix:
+#  include:
+#    - php: 7.2
+#      env: SYMFONY_LOWEST="4.4.*"
 
 install:
   - composer install --prefer-dist

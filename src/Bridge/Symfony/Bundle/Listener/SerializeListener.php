@@ -8,7 +8,7 @@ use Damax\Common\Bridge\Symfony\Bundle\Annotation\Serialize;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -32,7 +32,7 @@ class SerializeListener implements EventSubscriberInterface
         return [KernelEvents::VIEW => 'onKernelView'];
     }
 
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function onKernelView(ViewEvent $event)
     {
         $config = $event->getRequest()->attributes->get('_serialize');
 

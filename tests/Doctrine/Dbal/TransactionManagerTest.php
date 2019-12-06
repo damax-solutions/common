@@ -21,7 +21,7 @@ class TransactionManagerTest extends TestCase
      */
     private $manager;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->db = $this->createMock(Connection::class);
         $this->manager = new TransactionManager($this->db);
@@ -30,7 +30,7 @@ class TransactionManagerTest extends TestCase
     /**
      * @test
      */
-    public function it_begins_transaction()
+    public function it_begins_transaction(): void
     {
         $this->db
             ->expects($this->once())
@@ -43,7 +43,7 @@ class TransactionManagerTest extends TestCase
     /**
      * @test
      */
-    public function it_commits_transaction()
+    public function it_commits_transaction(): void
     {
         $this->db
             ->expects($this->once())
@@ -56,7 +56,7 @@ class TransactionManagerTest extends TestCase
     /**
      * @test
      */
-    public function it_rollbacks_transaction()
+    public function it_rollbacks_transaction(): void
     {
         $this->db
             ->expects($this->once())
@@ -69,7 +69,7 @@ class TransactionManagerTest extends TestCase
     /**
      * @test
      */
-    public function it_runs_transaction()
+    public function it_runs_transaction(): void
     {
         $fn = function () {
         };

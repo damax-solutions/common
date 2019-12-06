@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Damax\Common\Tests\Bridge\Symfony\Bundle\Listener;
 
 use Damax\Common\Bridge\Symfony\Bundle\Listener\PaginationListener;
-use Fig\Link\Link;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -15,11 +14,12 @@ use Psr\Link\LinkInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\WebLink\Link;
 
 class PaginationListenerTest extends TestCase
 {
@@ -33,7 +33,7 @@ class PaginationListenerTest extends TestCase
      */
     private $dispatcher;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->dispatcher = new EventDispatcher();
@@ -43,11 +43,11 @@ class PaginationListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_skips_response_modification_when_pager_is_not_set()
+    public function it_skips_response_modification_when_pager_is_not_set(): void
     {
-        $event = new FilterResponseEvent($this->createHttpKernel(), new Request(), HttpKernelInterface::MASTER_REQUEST, $response = new Response());
+        $event = new ResponseEvent($this->createHttpKernel(), new Request(), HttpKernelInterface::MASTER_REQUEST, $response = new Response());
 
-        $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::RESPONSE);
 
         $this->assertNull($response->headers->get('X-Page'));
         $this->assertNull($response->headers->get('X-Per-Page'));
@@ -58,13 +58,13 @@ class PaginationListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_adds_pagination_headers()
+    public function it_adds_pagination_headers(): void
     {
         $request = new Request([], [], ['_pager' => $this->createPager()]);
 
-        $event = new FilterResponseEvent($this->createHttpKernel(), $request, HttpKernelInterface::MASTER_REQUEST, $response = new Response());
+        $event = new ResponseEvent($this->createHttpKernel(), $request, HttpKernelInterface::MASTER_REQUEST, $response = new Response());
 
-        $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::RESPONSE);
 
         $this->assertEquals(3, $response->headers->get('X-Page'));
         $this->assertEquals(5, $response->headers->get('X-Per-Page'));
@@ -75,11 +75,11 @@ class PaginationListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_skips_request_attributes_setup_for_sub_request()
+    public function it_skips_request_attributes_setup_for_sub_request(): void
     {
-        $event = new GetResponseForControllerResultEvent($this->createHttpKernel(), $request = new Request(), HttpKernelInterface::SUB_REQUEST, null);
+        $event = new ViewEvent($this->createHttpKernel(), $request = new Request(), HttpKernelInterface::SUB_REQUEST, null);
 
-        $this->dispatcher->dispatch(KernelEvents::VIEW, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::VIEW);
 
         $this->assertNull($request->attributes->get('_pager'));
         $this->assertNull($request->attributes->get('_links'));
@@ -88,11 +88,11 @@ class PaginationListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_skips_request_attribute_setup_when_pager_is_not_set()
+    public function it_skips_request_attribute_setup_when_pager_is_not_set(): void
     {
-        $event = new GetResponseForControllerResultEvent($this->createHttpKernel(), $request = new Request(), HttpKernelInterface::MASTER_REQUEST, null);
+        $event = new ViewEvent($this->createHttpKernel(), $request = new Request(), HttpKernelInterface::MASTER_REQUEST, null);
 
-        $this->dispatcher->dispatch(KernelEvents::VIEW, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::VIEW);
 
         $this->assertNull($request->attributes->get('_pager'));
         $this->assertNull($request->attributes->get('_links'));
@@ -101,14 +101,14 @@ class PaginationListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_sets_request_attributes()
+    public function it_sets_request_attributes(): void
     {
         $request = new Request();
         $request->attributes->set('_route', 'page');
         $request->attributes->set('_route_params', ['foo' => 'bar']);
 
         $pager = $this->createPager();
-        $event = new GetResponseForControllerResultEvent($this->createHttpKernel(), $request, HttpKernelInterface::MASTER_REQUEST, $pager);
+        $event = new ViewEvent($this->createHttpKernel(), $request, HttpKernelInterface::MASTER_REQUEST, $pager);
 
         $this->urlGenerator
             ->expects($this->exactly(4))
@@ -122,7 +122,7 @@ class PaginationListenerTest extends TestCase
             ->willReturnOnConsecutiveCalls('page-first', 'page-last', 'page-prev', 'page-next')
         ;
 
-        $this->dispatcher->dispatch(KernelEvents::VIEW, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::VIEW);
 
         $this->assertSame($pager, $request->attributes->get('_pager'));
 
@@ -140,7 +140,7 @@ class PaginationListenerTest extends TestCase
         $this->assertLink('next', 'page-next', $links[3]);
     }
 
-    private function assertLink(string $rel, string $href, LinkInterface $link)
+    private function assertLink(string $rel, string $href, LinkInterface $link): void
     {
         $this->assertEquals([$rel], $link->getRels());
         $this->assertEquals($href, $link->getHref());

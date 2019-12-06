@@ -13,11 +13,9 @@ class MetadataTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_metadata()
+    public function it_creates_metadata(): void
     {
-        $metadata = Metadata::create();
-
-        $this->assertAttributeEquals([], 'values', $metadata);
+        $this->assertEquals([], Metadata::create()->all());
     }
 
     /**
@@ -27,7 +25,7 @@ class MetadataTest extends TestCase
     {
         $metadata = Metadata::fromArray(['foo' => 'bar', 'baz' => 'qux']);
 
-        $this->assertAttributeEquals(['foo' => 'bar', 'baz' => 'qux'], 'values', $metadata);
+        $this->assertEquals(['foo' => 'bar', 'baz' => 'qux'], $metadata->all());
 
         return $metadata;
     }
@@ -35,11 +33,11 @@ class MetadataTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_from_key_value()
+    public function it_creates_from_key_value(): void
     {
         $metadata = Metadata::kv('foo', 'bar');
 
-        $this->assertAttributeEquals(['foo' => 'bar'], 'values', $metadata);
+        $this->assertEquals(['foo' => 'bar'], $metadata->all());
     }
 
     /**
@@ -47,7 +45,7 @@ class MetadataTest extends TestCase
      *
      * @depends it_creates_from_array
      */
-    public function it_checks_key_existence(Metadata $metadata)
+    public function it_checks_key_existence(Metadata $metadata): void
     {
         $this->assertTrue($metadata->has('foo'));
         $this->assertTrue($metadata->has('baz'));
@@ -59,7 +57,7 @@ class MetadataTest extends TestCase
      *
      * @depends it_creates_from_array
      */
-    public function it_retrieves_value_by_key(Metadata $metadata)
+    public function it_retrieves_value_by_key(Metadata $metadata): void
     {
         $this->assertEquals('bar', $metadata->get('foo'));
         $this->assertEquals('qux', $metadata->get('baz'));
@@ -70,7 +68,7 @@ class MetadataTest extends TestCase
      *
      * @depends it_creates_from_array
      */
-    public function it_retrieves_all_values(Metadata $metadata)
+    public function it_retrieves_all_values(Metadata $metadata): void
     {
         $this->assertEquals(['foo' => 'bar', 'baz' => 'qux'], $metadata->all());
     }
@@ -80,7 +78,7 @@ class MetadataTest extends TestCase
      *
      * @depends it_creates_from_array
      */
-    public function it_retrieves_missing_key(Metadata $metadata)
+    public function it_retrieves_missing_key(Metadata $metadata): void
     {
         $this->expectException(OutOfBoundsException::class);
         $this->expectExceptionMessage('Value by key "abc" not found.');
@@ -93,7 +91,7 @@ class MetadataTest extends TestCase
      *
      * @depends it_creates_from_array
      */
-    public function it_serializes_to_json(Metadata $metadata)
+    public function it_serializes_to_json(Metadata $metadata): void
     {
         $this->assertEquals(['foo' => 'bar', 'baz' => 'qux'], $metadata->jsonSerialize());
     }
@@ -101,7 +99,7 @@ class MetadataTest extends TestCase
     /**
      * @test
      */
-    public function it_merges_metadata()
+    public function it_merges_metadata(): void
     {
         $one = Metadata::kv('foo', 'bar');
         $two = Metadata::kv('baz', 'qux');

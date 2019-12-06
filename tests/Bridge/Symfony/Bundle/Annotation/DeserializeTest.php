@@ -13,7 +13,7 @@ class DeserializeTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_annotation_with_default_properties()
+    public function it_creates_annotation_with_default_properties(): void
     {
         $annotation = new Deserialize(['value' => stdClass::class]);
 
@@ -28,7 +28,7 @@ class DeserializeTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_annotation()
+    public function it_creates_annotation(): void
     {
         $annotation = new Deserialize([
             'class' => stdClass::class,

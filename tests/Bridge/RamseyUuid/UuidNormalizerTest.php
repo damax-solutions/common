@@ -14,7 +14,7 @@ class UuidNormalizerTest extends TestCase
     /**
      * @test
      */
-    public function it_checks_denormalization_is_supported()
+    public function it_checks_denormalization_is_supported(): void
     {
         $normalizer = new UuidNormalizer();
 
@@ -25,7 +25,7 @@ class UuidNormalizerTest extends TestCase
     /**
      * @test
      */
-    public function it_denormalizes_data()
+    public function it_denormalizes_data(): void
     {
         $uuid = (new UuidNormalizer())->denormalize('dbb93230-8472-46e0-8ba0-aa480782ff66', UuidInterface::class);
 

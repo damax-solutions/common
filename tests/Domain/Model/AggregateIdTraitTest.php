@@ -11,7 +11,7 @@ class AggregateIdTraitTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_id()
+    public function it_creates_id(): void
     {
         $this->assertEquals('abc', (string) AggregateRootId::fromString('abc'));
     }

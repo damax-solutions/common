@@ -28,22 +28,22 @@ class DomainEventListener implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelResponse()
+    public function onKernelResponse(): void
     {
         $this->publisher->publish();
     }
 
-    public function onKernelException()
+    public function onKernelException(): void
     {
         $this->publisher->discard();
     }
 
-    public function onConsoleTerminate()
+    public function onConsoleTerminate(): void
     {
         $this->publisher->publish();
     }
 
-    public function onConsoleError()
+    public function onConsoleError(): void
     {
         $this->publisher->discard();
     }

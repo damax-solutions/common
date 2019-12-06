@@ -14,7 +14,7 @@ class AsArrayTraitTest extends TestCase
      */
     private $object;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = new ObjectAsArray();
         $this->object->fooField = 'Foo value';
@@ -27,7 +27,7 @@ class AsArrayTraitTest extends TestCase
     /**
      * @test
      */
-    public function it_accesses_properties()
+    public function it_accesses_properties(): void
     {
         $this->assertTrue(isset($this->object['foo_field']));
         $this->assertTrue(isset($this->object['bar_field']));
@@ -44,7 +44,7 @@ class AsArrayTraitTest extends TestCase
     /**
      * @test
      */
-    public function it_forbids_property_mutation()
+    public function it_forbids_property_mutation(): void
     {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Method "Damax\Common\Application\AsArrayTrait::offsetSet" not implemented.');
@@ -55,7 +55,7 @@ class AsArrayTraitTest extends TestCase
     /**
      * @test
      */
-    public function it_forbids_property_deletion()
+    public function it_forbids_property_deletion(): void
     {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Method "Damax\Common\Application\AsArrayTrait::offsetUnset" not implemented.');

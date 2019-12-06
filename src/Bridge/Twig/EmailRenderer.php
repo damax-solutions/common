@@ -6,13 +6,13 @@ namespace Damax\Common\Bridge\Twig;
 
 use Damax\Common\Domain\Email\EmailRenderer as EmailRendererInterface;
 use Damax\Common\Domain\Email\Template;
-use Twig_Environment;
+use Twig\Environment;
 
 final class EmailRenderer implements EmailRendererInterface
 {
     private $twig;
 
-    public function __construct(Twig_Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }

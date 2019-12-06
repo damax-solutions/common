@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -29,7 +29,7 @@ class SerializeListenerTest extends TestCase
      */
     private $dispatcher;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->serializer = $this->createMock(SerializerInterface::class);
         $this->dispatcher = new EventDispatcher();
@@ -39,11 +39,11 @@ class SerializeListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_skips_on_missing_annotation()
+    public function it_skips_on_missing_annotation(): void
     {
         $event = $this->createEvent();
 
-        $this->dispatcher->dispatch(KernelEvents::VIEW, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::VIEW);
 
         $this->assertNull($event->getResponse());
     }
@@ -51,12 +51,12 @@ class SerializeListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_skips_when_response_is_set()
+    public function it_skips_when_response_is_set(): void
     {
         $event = $this->createEvent(new Serialize(['foo', 'bar']));
         $event->setResponse(new Response());
 
-        $this->dispatcher->dispatch(KernelEvents::VIEW, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::VIEW);
 
         $response = $event->getResponse();
 
@@ -67,7 +67,7 @@ class SerializeListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_generates_json_response()
+    public function it_generates_json_response(): void
     {
         $event = $this->createEvent(new Serialize([]), '__data__');
 
@@ -78,7 +78,7 @@ class SerializeListenerTest extends TestCase
             ->willReturn('{"body":"__data__"}')
         ;
 
-        $this->dispatcher->dispatch(KernelEvents::VIEW, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::VIEW);
 
         /** @var JsonResponse $response */
         $response = $event->getResponse();
@@ -92,7 +92,7 @@ class SerializeListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_generates_json_response_for_post_request()
+    public function it_generates_json_response_for_post_request(): void
     {
         $event = $this->createEvent(new Serialize(['foo', 'bar']), '__data__');
         $event->getRequest()->setMethod('POST');
@@ -104,17 +104,17 @@ class SerializeListenerTest extends TestCase
             ->willReturn('{"body":"__data__"}')
         ;
 
-        $this->dispatcher->dispatch(KernelEvents::VIEW, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::VIEW);
 
         $this->assertEquals(201, $event->getResponse()->getStatusCode());
     }
 
-    private function createEvent(Serialize $annotation = null, string $controllerResult = null): GetResponseForControllerResultEvent
+    private function createEvent(Serialize $annotation = null, string $controllerResult = null): ViewEvent
     {
         $kernel = $this->createMock(HttpKernelInterface::class);
 
         $request = new Request([], [], ['_serialize' => $annotation]);
 
-        return new GetResponseForControllerResultEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $controllerResult);
+        return new ViewEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $controllerResult);
     }
 }

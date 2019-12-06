@@ -14,7 +14,7 @@ class EntityIdNormalizerTest extends TestCase
     /**
      * @test
      */
-    public function it_supports_denormalization()
+    public function it_supports_denormalization(): void
     {
         $normalizer = new EntityIdNormalizer(AggregateRootId::class);
         $this->assertTrue($normalizer->supportsDenormalization('', AggregateRootId::class));
@@ -26,7 +26,7 @@ class EntityIdNormalizerTest extends TestCase
     /**
      * @test
      */
-    public function it_denormalizes_data()
+    public function it_denormalizes_data(): void
     {
         $normalizer = new EntityIdNormalizer(AggregateRootId::class);
         $entityId = $normalizer->denormalize('ABC', AggregateRootId::class);

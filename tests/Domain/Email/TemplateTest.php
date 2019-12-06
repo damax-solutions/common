@@ -12,7 +12,7 @@ class TemplateTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_template()
+    public function it_creates_template(): void
     {
         $template = new Template('Subject', 'Text body', 'HTML body');
 

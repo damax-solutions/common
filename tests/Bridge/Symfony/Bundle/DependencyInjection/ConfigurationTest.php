@@ -16,7 +16,7 @@ class ConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function it_processes_empty_config()
+    public function it_processes_empty_config(): void
     {
         $config = [];
 
@@ -33,7 +33,7 @@ class ConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function it_configures_listeners()
+    public function it_configures_listeners(): void
     {
         $config = [
             'listeners' => [

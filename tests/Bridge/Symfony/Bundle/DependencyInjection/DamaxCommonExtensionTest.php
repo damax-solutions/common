@@ -22,7 +22,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 
 class DamaxCommonExtensionTest extends AbstractExtensionTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_services()
+    public function it_registers_services(): void
     {
         $this->load();
 
@@ -43,7 +43,7 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_doctrine_services()
+    public function it_registers_doctrine_services(): void
     {
         $this->container->setParameter('kernel.bundles', ['DoctrineBundle' => true]);
 
@@ -56,7 +56,7 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_twig_services()
+    public function it_registers_twig_services(): void
     {
         $this->container->setParameter('kernel.bundles', ['TwigBundle' => true]);
 
@@ -68,7 +68,7 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_simple_bus_services()
+    public function it_registers_simple_bus_services(): void
     {
         $this->container->setParameter('kernel.bundles', ['SimpleBusEventBusBundle' => true]);
 
@@ -83,7 +83,7 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_domain_events_listener()
+    public function it_registers_domain_events_listener(): void
     {
         $this->load([
             'listeners' => ['domain_events' => true],
@@ -96,7 +96,7 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_annotation_listeners()
+    public function it_registers_annotation_listeners(): void
     {
         $this->load([
             'listeners' => ['serialize' => true, 'deserialize' => true],
@@ -112,7 +112,7 @@ class DamaxCommonExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_registers_pagination_listener()
+    public function it_registers_pagination_listener(): void
     {
         $this->load([
             'listeners' => ['pagination' => true],
