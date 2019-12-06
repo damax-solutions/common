@@ -8,7 +8,7 @@ use Damax\Common\Bridge\Symfony\Bundle\Annotation\Deserialize;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -41,7 +41,7 @@ class DeserializeListener implements EventSubscriberInterface
      * @throws UnprocessableEntityHttpException
      * @throws BadRequestHttpException
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         $request = $event->getRequest();
 

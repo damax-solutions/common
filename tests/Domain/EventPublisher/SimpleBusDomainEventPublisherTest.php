@@ -28,7 +28,7 @@ class SimpleBusDomainEventPublisherTest extends TestCase
      */
     private $publisher;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->recorder = $this->createMock(ContainsRecordedMessages::class);
         $this->messageBus = $this->createMock(MessageBus::class);
@@ -38,7 +38,7 @@ class SimpleBusDomainEventPublisherTest extends TestCase
     /**
      * @test
      */
-    public function it_discards_messages()
+    public function it_discards_messages(): void
     {
         $this->recorder
             ->expects($this->once())
@@ -55,7 +55,7 @@ class SimpleBusDomainEventPublisherTest extends TestCase
     /**
      * @test
      */
-    public function it_publishes_no_messages()
+    public function it_publishes_no_messages(): void
     {
         $this->recorder
             ->expects($this->once())
@@ -73,7 +73,7 @@ class SimpleBusDomainEventPublisherTest extends TestCase
     /**
      * @test
      */
-    public function it_publishes_messages()
+    public function it_publishes_messages(): void
     {
         $msg1 = new stdClass();
         $msg2 = new stdClass();

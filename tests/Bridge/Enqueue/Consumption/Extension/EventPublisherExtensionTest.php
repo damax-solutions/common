@@ -23,7 +23,7 @@ class EventPublisherExtensionTest extends TestCase
      */
     private $extension;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->publisher = $this->createMock(EventPublisher::class);
         $this->extension = new EventPublisherExtension($this->publisher);
@@ -32,7 +32,7 @@ class EventPublisherExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_publishes_events_on_post_received()
+    public function it_publishes_events_on_post_received(): void
     {
         $this->publisher
             ->expects($this->once())
@@ -47,7 +47,7 @@ class EventPublisherExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_publishes_events_when_interrupted()
+    public function it_publishes_events_when_interrupted(): void
     {
         $this->publisher
             ->expects($this->once())

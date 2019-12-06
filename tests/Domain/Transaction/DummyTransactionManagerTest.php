@@ -12,7 +12,7 @@ class DummyTransactionManagerTest extends TestCase
     /**
      * @test
      */
-    public function it_runs_transaction()
+    public function it_runs_transaction(): void
     {
         $ran = false;
 

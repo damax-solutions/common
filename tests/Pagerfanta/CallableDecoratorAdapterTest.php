@@ -16,7 +16,7 @@ class CallableDecoratorAdapterTest extends TestCase
      */
     private $decorated;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->decorated = $this->createMock(AdapterInterface::class);
     }
@@ -24,7 +24,7 @@ class CallableDecoratorAdapterTest extends TestCase
     /**
      * @test
      */
-    public function it_retrieves_total_count()
+    public function it_retrieves_total_count(): void
     {
         $this->decorated
             ->expects($this->once())
@@ -40,7 +40,7 @@ class CallableDecoratorAdapterTest extends TestCase
     /**
      * @test
      */
-    public function it_applies_callback_on_items()
+    public function it_applies_callback_on_items(): void
     {
         $this->decorated
             ->expects($this->once())

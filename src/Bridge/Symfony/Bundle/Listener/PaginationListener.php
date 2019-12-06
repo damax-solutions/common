@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Damax\Common\Bridge\Symfony\Bundle\Listener;
 
-use Fig\Link\GenericLinkProvider;
-use Fig\Link\Link;
 use Pagerfanta\Pagerfanta;
 use Psr\Link\EvolvableLinkProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\WebLink\GenericLinkProvider;
+use Symfony\Component\WebLink\Link;
 
 class PaginationListener implements EventSubscriberInterface
 {
@@ -31,7 +31,7 @@ class PaginationListener implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function onKernelView(ViewEvent $event)
     {
         $paginator = $event->getControllerResult();
 
@@ -56,7 +56,7 @@ class PaginationListener implements EventSubscriberInterface
         $attributes->set('_pager', $paginator);
     }
 
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event)
     {
         $paginator = $event->getRequest()->attributes->get('_pager');
 

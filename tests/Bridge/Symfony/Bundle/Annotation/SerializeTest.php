@@ -12,7 +12,7 @@ class SerializeTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_annotation_with_default_properties()
+    public function it_creates_annotation_with_default_properties(): void
     {
         $annotation = new Serialize(['foo', 'bar']);
 
@@ -24,7 +24,7 @@ class SerializeTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_annotation()
+    public function it_creates_annotation(): void
     {
         $annotation = new Serialize(['value' => ['foo', 'bar']]);
 

@@ -12,7 +12,7 @@ use stdClass;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -39,7 +39,7 @@ class DeserializeListenerTest extends TestCase
      */
     private $dispatcher;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->serializer = $this->createMock(SerializerInterface::class);
         $this->validator = $this->createMock(ValidatorInterface::class);
@@ -50,11 +50,11 @@ class DeserializeListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_skips_on_missing_annotation()
+    public function it_skips_on_missing_annotation(): void
     {
         $event = $this->createEvent();
 
-        $this->dispatcher->dispatch(KernelEvents::CONTROLLER, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::CONTROLLER);
 
         $this->assertNull($event->getRequest()->attributes->get('data'));
     }
@@ -62,11 +62,11 @@ class DeserializeListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_skips_on_unsupported_content_type()
+    public function it_skips_on_unsupported_content_type(): void
     {
         $event = $this->createEvent(new Deserialize(['class' => stdClass::class]), 'text/plain');
 
-        $this->dispatcher->dispatch(KernelEvents::CONTROLLER, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::CONTROLLER);
 
         $this->assertNull($event->getRequest()->attributes->get('data'));
     }
@@ -74,7 +74,7 @@ class DeserializeListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_fails_to_process_invalid_json_request()
+    public function it_fails_to_process_invalid_json_request(): void
     {
         $event = $this->createEvent(new Deserialize([
             'class' => stdClass::class,
@@ -95,13 +95,13 @@ class DeserializeListenerTest extends TestCase
         $this->expectException(UnprocessableEntityHttpException::class);
         $this->expectExceptionMessage('Invalid json.');
 
-        $this->dispatcher->dispatch(KernelEvents::CONTROLLER, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::CONTROLLER);
     }
 
     /**
      * @test
      */
-    public function it_sets_processed_object_to_request_attribute()
+    public function it_sets_processed_object_to_request_attribute(): void
     {
         $event = $this->createEvent(new Deserialize([
             'class' => stdClass::class,
@@ -119,7 +119,7 @@ class DeserializeListenerTest extends TestCase
             ->method('validate')
         ;
 
-        $this->dispatcher->dispatch(KernelEvents::CONTROLLER, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::CONTROLLER);
 
         $this->assertSame($object, $event->getRequest()->attributes->get('object'));
     }
@@ -127,7 +127,7 @@ class DeserializeListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_converts_invalid_json_request_to_problem_response()
+    public function it_converts_invalid_json_request_to_problem_response(): void
     {
         $event = $this->createEvent(new Deserialize([
             'class' => stdClass::class,
@@ -153,7 +153,7 @@ class DeserializeListenerTest extends TestCase
             ->willReturn('__errors__')
         ;
 
-        $this->dispatcher->dispatch(KernelEvents::CONTROLLER, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::CONTROLLER);
 
         /** @var JsonResponse $response */
         $response = call_user_func($event->getController());
@@ -161,10 +161,11 @@ class DeserializeListenerTest extends TestCase
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(400, $response->getStatusCode());
         $this->assertEquals('__errors__', $response->getContent());
-        $this->assertArraySubset(['content-type' => ['application/problem+json']], $response->headers->all());
+        $this->assertTrue($response->headers->has('content-type'));
+        $this->assertEquals('application/problem+json', $response->headers->get('content-type'));
     }
 
-    private function createEvent(Deserialize $annotation = null, string $contentType = 'application/json'): FilterControllerEvent
+    private function createEvent(Deserialize $annotation = null, string $contentType = 'application/json'): ControllerEvent
     {
         $kernel = $this->createMock(HttpKernelInterface::class);
 
@@ -178,6 +179,6 @@ class DeserializeListenerTest extends TestCase
             '__content__'
         );
 
-        return new FilterControllerEvent($kernel, function () {}, $request, HttpKernelInterface::MASTER_REQUEST);
+        return new ControllerEvent($kernel, function () {}, $request, HttpKernelInterface::MASTER_REQUEST);
     }
 }

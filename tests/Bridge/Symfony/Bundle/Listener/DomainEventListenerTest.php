@@ -9,14 +9,15 @@ use Damax\Common\Domain\EventPublisher\EventPublisher;
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class DomainEventListenerTest extends TestCase
@@ -31,7 +32,7 @@ class DomainEventListenerTest extends TestCase
      */
     private $dispatcher;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->publisher = $this->createMock(EventPublisher::class);
         $this->dispatcher = new EventDispatcher();
@@ -41,52 +42,55 @@ class DomainEventListenerTest extends TestCase
     /**
      * @test
      */
-    public function it_publishes_events_on_kernel_response()
+    public function it_publishes_events_on_kernel_response(): void
     {
         $this->publisher
             ->expects($this->once())
             ->method('publish')
         ;
 
-        $event = $this->createMock(FilterResponseEvent::class);
+        $rc = new ReflectionClass(ResponseEvent::class);
+        $event = $rc->newInstanceWithoutConstructor();
 
-        $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::RESPONSE);
     }
 
     /**
      * @test
      */
-    public function it_discards_events_on_kernel_exception()
+    public function it_discards_events_on_kernel_exception(): void
     {
         $this->publisher
             ->expects($this->once())
             ->method('discard')
         ;
 
-        $event = $this->createMock(GetResponseForExceptionEvent::class);
+        $rc = new ReflectionClass(ExceptionEvent::class);
+        $event = $rc->newInstanceWithoutConstructor();
 
-        $this->dispatcher->dispatch(KernelEvents::EXCEPTION, $event);
+        $this->dispatcher->dispatch($event, KernelEvents::EXCEPTION);
     }
 
     /**
      * @test
      */
-    public function it_publishes_events_on_console_termination()
+    public function it_publishes_events_on_console_termination(): void
     {
         $this->publisher
             ->expects($this->once())
             ->method('publish')
         ;
 
-        $event = $this->createMock(ConsoleTerminateEvent::class);
+        $rc = new ReflectionClass(ConsoleTerminateEvent::class);
+        $event = $rc->newInstanceWithoutConstructor();
 
-        $this->dispatcher->dispatch(ConsoleEvents::TERMINATE, $event);
+        $this->dispatcher->dispatch($event, ConsoleEvents::TERMINATE);
     }
 
     /**
      * @test
      */
-    public function it_discards_events_on_console_error()
+    public function it_discards_events_on_console_error(): void
     {
         $this->publisher
             ->expects($this->once())
@@ -99,6 +103,6 @@ class DomainEventListenerTest extends TestCase
             new Exception()
         );
 
-        $this->dispatcher->dispatch(ConsoleEvents::ERROR, $event);
+        $this->dispatcher->dispatch($event, ConsoleEvents::ERROR);
     }
 }
