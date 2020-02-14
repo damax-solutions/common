@@ -31,6 +31,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->booleanNode('serialize')->defaultFalse()->end()
                 ->booleanNode('deserialize')->defaultFalse()->end()
+                ->booleanNode('validate')->defaultFalse()->end()
                 ->booleanNode('pagination')->defaultFalse()->end()
                 ->booleanNode('domain_events')->defaultFalse()->end()
             ->end()

@@ -2,5 +2,6 @@ damax_common:
     listeners:
         serialize: true
         deserialize: true
+        validate: true
         pagination: true
         domain_events: true

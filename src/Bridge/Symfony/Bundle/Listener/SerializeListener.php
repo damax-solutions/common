@@ -40,12 +40,19 @@ class SerializeListener implements EventSubscriberInterface
             return;
         }
 
-        $context = $config->groups() ? ['groups' => $config->groups()] : [];
-
-        $json = $this->serializer->serialize($event->getControllerResult(), self::CONTENT_TYPE, $context);
+        $json = $this->serializer->serialize(
+            $event->getControllerResult(),
+            self::CONTENT_TYPE,
+            $config->context()
+        );
 
         $code = self::METHOD_TO_CODE[$event->getRequest()->getMethod()] ?? Response::HTTP_OK;
 
-        $event->setResponse(JsonResponse::fromJsonString($json, $code)->setEncodingOptions(JSON_UNESCAPED_UNICODE));
+        $response = JsonResponse
+            ::fromJsonString($json, $code)
+            ->setEncodingOptions(JSON_UNESCAPED_UNICODE)
+        ;
+
+        $event->setResponse($response);
     }
 }

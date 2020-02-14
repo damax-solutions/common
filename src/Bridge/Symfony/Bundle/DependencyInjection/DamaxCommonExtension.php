@@ -8,6 +8,7 @@ use Damax\Common\Bridge\Symfony\Bundle\Listener\DeserializeListener;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\DomainEventListener;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\PaginationListener;
 use Damax\Common\Bridge\Symfony\Bundle\Listener\SerializeListener;
+use Damax\Common\Bridge\Symfony\Bundle\Listener\ValidateListener;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -46,6 +47,7 @@ final class DamaxCommonExtension extends ConfigurableExtension
         $listeners = [
             'serialize' => SerializeListener::class,
             'deserialize' => DeserializeListener::class,
+            'validate' => ValidateListener::class,
             'pagination' => PaginationListener::class,
             'domain_events' => DomainEventListener::class,
         ];

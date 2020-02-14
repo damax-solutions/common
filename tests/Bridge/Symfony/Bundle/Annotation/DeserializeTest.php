@@ -18,10 +18,8 @@ class DeserializeTest extends TestCase
         $annotation = new Deserialize(['value' => stdClass::class]);
 
         $this->assertEquals(stdClass::class, $annotation->className());
-        $this->assertEquals([], $annotation->groups());
         $this->assertEquals('data', $annotation->param());
         $this->assertEquals('deserialize', $annotation->getAliasName());
-        $this->assertFalse($annotation->validate());
         $this->assertFalse($annotation->allowArray());
     }
 
@@ -32,14 +30,10 @@ class DeserializeTest extends TestCase
     {
         $annotation = new Deserialize([
             'class' => stdClass::class,
-            'validate' => true,
-            'groups' => ['foo', 'bar'],
             'param' => 'command',
         ]);
 
         $this->assertEquals(stdClass::class, $annotation->className());
-        $this->assertEquals(['foo', 'bar'], $annotation->groups());
         $this->assertEquals('command', $annotation->param());
-        $this->assertTrue($annotation->validate());
     }
 }

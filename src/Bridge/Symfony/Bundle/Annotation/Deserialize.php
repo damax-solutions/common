@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Damax\Common\Bridge\Symfony\Bundle\Annotation;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 /**
  * @Annotation
@@ -17,14 +18,24 @@ final class Deserialize implements ConfigurationInterface
     private $class;
 
     /**
-     * @var bool
+     * @var array
      */
-    private $validate;
+    private $ignore;
 
     /**
-     * @var string[]
+     * @var int
      */
-    private $groups;
+    private $refLimit;
+
+    /**
+     * @var bool
+     */
+    private $allowExtra;
+
+    /**
+     * @var array
+     */
+    private $constructorArgs;
 
     /**
      * @var string
@@ -34,8 +45,12 @@ final class Deserialize implements ConfigurationInterface
     public function __construct(array $data)
     {
         $this->class = $data['class'] ?? $data['value'];
-        $this->validate = $data['validate'] ?? false;
-        $this->groups = $data['groups'] ?? [];
+
+        $this->ignore = (array) ($data['ignore'] ?? []);
+        $this->refLimit = (int) ($data['refLimit'] ?? 1);
+        $this->allowExtra = (bool) ($data['allowExtra'] ?? true);
+        $this->constructorArgs = (array) ($data['constructorArgs'] ?? []);
+
         $this->param = $data['param'] ?? 'data';
     }
 
@@ -44,14 +59,14 @@ final class Deserialize implements ConfigurationInterface
         return $this->class;
     }
 
-    public function validate(): bool
+    public function context(): array
     {
-        return $this->validate;
-    }
-
-    public function groups(): array
-    {
-        return $this->groups;
+        return [
+            AbstractNormalizer::IGNORED_ATTRIBUTES => $this->ignore,
+            AbstractNormalizer::CIRCULAR_REFERENCE_LIMIT => $this->refLimit,
+            AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => $this->allowExtra,
+            AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS => $this->constructorArgs,
+        ];
     }
 
     public function param(): string

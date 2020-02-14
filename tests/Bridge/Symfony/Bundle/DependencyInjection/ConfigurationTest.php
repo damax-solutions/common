@@ -26,6 +26,7 @@ class ConfigurationTest extends TestCase
                 'deserialize' => false,
                 'pagination' => false,
                 'domain_events' => false,
+                'validate' => false,
             ],
         ]);
     }
@@ -41,6 +42,7 @@ class ConfigurationTest extends TestCase
                 'deserialize' => true,
                 'pagination' => true,
                 'domain_events' => true,
+                'validate' => true,
             ],
         ];
 
@@ -50,6 +52,7 @@ class ConfigurationTest extends TestCase
                 'deserialize' => true,
                 'pagination' => true,
                 'domain_events' => true,
+                'validate' => true,
             ],
         ]);
     }

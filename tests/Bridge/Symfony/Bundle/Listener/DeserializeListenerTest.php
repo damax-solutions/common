@@ -10,17 +10,14 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\Exception\UnsupportedException;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\ConstraintViolationInterface;
-use Symfony\Component\Validator\ConstraintViolationList;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class DeserializeListenerTest extends TestCase
 {
@@ -30,11 +27,6 @@ class DeserializeListenerTest extends TestCase
     private $serializer;
 
     /**
-     * @var ValidatorInterface|MockObject
-     */
-    private $validator;
-
-    /**
      * @var EventDispatcher
      */
     private $dispatcher;
@@ -42,9 +34,8 @@ class DeserializeListenerTest extends TestCase
     protected function setUp(): void
     {
         $this->serializer = $this->createMock(SerializerInterface::class);
-        $this->validator = $this->createMock(ValidatorInterface::class);
         $this->dispatcher = new EventDispatcher();
-        $this->dispatcher->addSubscriber(new DeserializeListener($this->serializer, $this->validator));
+        $this->dispatcher->addSubscriber(new DeserializeListener($this->serializer));
     }
 
     /**
@@ -76,20 +67,41 @@ class DeserializeListenerTest extends TestCase
      */
     public function it_fails_to_process_invalid_json_request(): void
     {
-        $event = $this->createEvent(new Deserialize([
-            'class' => stdClass::class,
-            'groups' => ['foo', 'bar'],
-        ]));
+        $event = $this->createEvent(
+            new Deserialize(
+                [
+                    'class' => stdClass::class,
+                    'ignore' => ['field1'],
+                    'allowExtra' => false,
+                    'constructorArgs' => [
+                        stdClass::class => [
+                            10, 'fof',
+                        ],
+                    ],
+                    'refLimit' => 2,
+                ]
+            )
+        );
 
         $this->serializer
             ->expects($this->once())
             ->method('deserialize')
-            ->with('__content__', stdClass::class, 'json', ['groups' => ['foo', 'bar']])
+            ->with(
+                '__content__',
+                stdClass::class,
+                'json',
+                [
+                    AbstractNormalizer::IGNORED_ATTRIBUTES => ['field1'],
+                    AbstractNormalizer::CIRCULAR_REFERENCE_LIMIT => 2,
+                    AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
+                    AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS => [
+                        stdClass::class => [
+                            10, 'fof',
+                        ],
+                    ],
+                ]
+            )
             ->willThrowException(new UnsupportedException())
-        ;
-        $this->validator
-            ->expects($this->never())
-            ->method('validate')
         ;
 
         $this->expectException(UnprocessableEntityHttpException::class);
@@ -103,20 +115,30 @@ class DeserializeListenerTest extends TestCase
      */
     public function it_sets_processed_object_to_request_attribute(): void
     {
-        $event = $this->createEvent(new Deserialize([
-            'class' => stdClass::class,
-            'param' => 'object',
-        ]));
+        $event = $this->createEvent(
+            new Deserialize(
+                [
+                    'class' => stdClass::class,
+                    'param' => 'object',
+                ]
+            )
+        );
 
         $this->serializer
             ->expects($this->once())
             ->method('deserialize')
-            ->with('__content__', stdClass::class, 'json', [])
+            ->with(
+                '__content__',
+                stdClass::class,
+                'json',
+                [
+                    AbstractNormalizer::IGNORED_ATTRIBUTES => [],
+                    AbstractNormalizer::CIRCULAR_REFERENCE_LIMIT => 1,
+                    AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => true,
+                    AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS => [],
+                ]
+            )
             ->willReturn($object = new stdClass())
-        ;
-        $this->validator
-            ->expects($this->never())
-            ->method('validate')
         ;
 
         $this->dispatcher->dispatch($event, KernelEvents::CONTROLLER);
@@ -124,49 +146,10 @@ class DeserializeListenerTest extends TestCase
         $this->assertSame($object, $event->getRequest()->attributes->get('object'));
     }
 
-    /**
-     * @test
-     */
-    public function it_converts_invalid_json_request_to_problem_response(): void
-    {
-        $event = $this->createEvent(new Deserialize([
-            'class' => stdClass::class,
-            'validate' => true,
-        ]));
-
-        $this->serializer
-            ->method('deserialize')
-            ->willReturn($object = new stdClass())
-        ;
-        $this->validator
-            ->expects($this->once())
-            ->method('validate')
-            ->with($this->identicalTo($object))
-            ->willReturn($violations = new ConstraintViolationList([
-                $this->createMock(ConstraintViolationInterface::class),
-            ]))
-        ;
-        $this->serializer
-            ->expects($this->once())
-            ->method('serialize')
-            ->with($this->identicalTo($violations), 'json')
-            ->willReturn('__errors__')
-        ;
-
-        $this->dispatcher->dispatch($event, KernelEvents::CONTROLLER);
-
-        /** @var JsonResponse $response */
-        $response = call_user_func($event->getController());
-
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals(400, $response->getStatusCode());
-        $this->assertEquals('__errors__', $response->getContent());
-        $this->assertTrue($response->headers->has('content-type'));
-        $this->assertEquals('application/problem+json', $response->headers->get('content-type'));
-    }
-
-    private function createEvent(Deserialize $annotation = null, string $contentType = 'application/json'): ControllerEvent
-    {
+    private function createEvent(
+        Deserialize $annotation = null,
+        string $contentType = 'application/json'
+    ): ControllerEvent {
         $kernel = $this->createMock(HttpKernelInterface::class);
 
         $request = new Request(
@@ -179,6 +162,9 @@ class DeserializeListenerTest extends TestCase
             '__content__'
         );
 
-        return new ControllerEvent($kernel, function () {}, $request, HttpKernelInterface::MASTER_REQUEST);
+        return new ControllerEvent(
+            $kernel, function () {
+            }, $request, HttpKernelInterface::MASTER_REQUEST
+        );
     }
 }

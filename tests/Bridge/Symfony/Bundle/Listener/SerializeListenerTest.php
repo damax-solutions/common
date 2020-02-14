@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class SerializeListenerTest extends TestCase
@@ -53,7 +54,7 @@ class SerializeListenerTest extends TestCase
      */
     public function it_skips_when_response_is_set(): void
     {
-        $event = $this->createEvent(new Serialize(['foo', 'bar']));
+        $event = $this->createEvent(new Serialize(['value' => false]));
         $event->setResponse(new Response());
 
         $this->dispatcher->dispatch($event, KernelEvents::VIEW);
@@ -69,12 +70,12 @@ class SerializeListenerTest extends TestCase
      */
     public function it_generates_json_response(): void
     {
-        $event = $this->createEvent(new Serialize([]), '__data__');
+        $event = $this->createEvent(new Serialize(['value' => false]), '__data__');
 
         $this->serializer
             ->expects($this->once())
             ->method('serialize')
-            ->with('__data__', 'json', [])
+            ->with('__data__', 'json', [AbstractObjectNormalizer::DEEP_OBJECT_TO_POPULATE => false])
             ->willReturn('{"body":"__data__"}')
         ;
 
@@ -94,13 +95,13 @@ class SerializeListenerTest extends TestCase
      */
     public function it_generates_json_response_for_post_request(): void
     {
-        $event = $this->createEvent(new Serialize(['foo', 'bar']), '__data__');
+        $event = $this->createEvent(new Serialize(['value' => true]), '__data__');
         $event->getRequest()->setMethod('POST');
 
         $this->serializer
             ->expects($this->once())
             ->method('serialize')
-            ->with('__data__', 'json', ['groups' => ['foo', 'bar']])
+            ->with('__data__', 'json', [AbstractObjectNormalizer::DEEP_OBJECT_TO_POPULATE => true])
             ->willReturn('{"body":"__data__"}')
         ;
 

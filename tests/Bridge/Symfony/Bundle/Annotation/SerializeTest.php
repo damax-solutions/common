@@ -6,6 +6,7 @@ namespace Damax\Common\Tests\Bridge\Symfony\Bundle\Annotation;
 
 use Damax\Common\Bridge\Symfony\Bundle\Annotation\Serialize;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 
 class SerializeTest extends TestCase
 {
@@ -14,9 +15,14 @@ class SerializeTest extends TestCase
      */
     public function it_creates_annotation_with_default_properties(): void
     {
-        $annotation = new Serialize(['foo', 'bar']);
+        $annotation = new Serialize(['value' => false]);
 
-        $this->assertEquals(['foo', 'bar'], $annotation->groups());
+        $this->assertEquals(
+            [
+                AbstractObjectNormalizer::DEEP_OBJECT_TO_POPULATE => false,
+            ],
+            $annotation->context()
+        );
         $this->assertEquals('serialize', $annotation->getAliasName());
         $this->assertFalse($annotation->allowArray());
     }
@@ -24,10 +30,28 @@ class SerializeTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_annotation(): void
+    public function it_creates_annotation_with_value(): void
     {
-        $annotation = new Serialize(['value' => ['foo', 'bar']]);
+        $annotation = new Serialize(['value' => true]);
+        $this->assertEquals(
+            [
+                AbstractObjectNormalizer::DEEP_OBJECT_TO_POPULATE => true,
+            ],
+            $annotation->context()
+        );
+    }
 
-        $this->assertEquals(['foo', 'bar'], $annotation->groups());
+    /**
+     * @test
+     */
+    public function it_creates_annotation_with_named_param(): void
+    {
+        $annotation = new Serialize(['deepPopulate' => true]);
+        $this->assertEquals(
+            [
+                AbstractObjectNormalizer::DEEP_OBJECT_TO_POPULATE => true,
+            ],
+            $annotation->context()
+        );
     }
 }
