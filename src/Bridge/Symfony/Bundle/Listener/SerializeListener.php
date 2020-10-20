@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class SerializeListener implements EventSubscriberInterface
 {
@@ -35,6 +36,8 @@ class SerializeListener implements EventSubscriberInterface
     public function onKernelView(ViewEvent $event)
     {
         $config = $event->getRequest()->attributes->get('_serialize');
+        $method = $event->getRequest()->getMethod();
+        $result = $event->getControllerResult();
 
         if (!$config instanceof Serialize || $event->getResponse()) {
             return;
@@ -42,10 +45,23 @@ class SerializeListener implements EventSubscriberInterface
 
         $context = $config->groups() ? ['groups' => $config->groups()] : [];
 
-        $json = $this->serializer->serialize($event->getControllerResult(), self::CONTENT_TYPE, $context);
+        $event->setResponse($this->createResponse($method, $context, $result));
+    }
 
-        $code = self::METHOD_TO_CODE[$event->getRequest()->getMethod()] ?? Response::HTTP_OK;
+    private function createResponse(string $method, array $context, $result): Response
+    {
+        $json = $this->serializer->serialize($result, self::CONTENT_TYPE, $context);
 
-        $event->setResponse(JsonResponse::fromJsonString($json, $code)->setEncodingOptions(JSON_UNESCAPED_UNICODE));
+        if ($result instanceof ConstraintViolationListInterface) {
+            $code = Response::HTTP_BAD_REQUEST;
+            $type = 'application/problem+json';
+        } else {
+            $code = self::METHOD_TO_CODE[$method] ?? Response::HTTP_OK;
+            $type = 'application/json';
+        }
+
+        $response = JsonResponse::fromJsonString($json, $code, ['content-type' => $type]);
+
+        return $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }
 }
