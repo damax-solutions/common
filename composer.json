@@ -40,6 +40,17 @@
   "config": {
     "sort-packages": true
   },
+  "archive": {
+    "exclude": [
+      "/sample",
+      "/tests",
+      "/.gitignore",
+      "/.php_cs.dist",
+      "/.travis.yml",
+      "/Makefile",
+      "/phpunit.xml.dist"
+    ]
+  },
   "extra": {
     "branch-alias": {
       "dev-master": "2.0-dev"
