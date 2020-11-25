@@ -1,0 +1,8 @@
+sample/ exclude-ignore
+tests/ exclude-ignore
+.gitignore exclude-ignore
+.php_cs.dist exclude-ignore
+.travis.yml exclude-ignore
+Makefile exclude-ignore
+phpunit.xml.dist exclude-ignore
+
