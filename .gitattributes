@@ -1,7 +1,7 @@
-sample/ exclude-ignore
-tests/ exclude-ignore
-.gitignore exclude-ignore
-.php_cs.dist exclude-ignore
-.travis.yml exclude-ignore
-Makefile exclude-ignore
-phpunit.xml.dist exclude-ignore
+sample/ export-ignore
+tests/ export-ignore
+.gitignore export-ignore
+.php_cs.dist export-ignore
+.travis.yml export-ignore
+Makefile export-ignore
+phpunit.xml.dist export-ignore
