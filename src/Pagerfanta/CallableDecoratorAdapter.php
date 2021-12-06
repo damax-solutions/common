@@ -26,7 +26,7 @@ final class CallableDecoratorAdapter implements AdapterInterface
     public function getSlice($offset, $length): array
     {
         $items = $this->adapter->getSlice($offset, $length);
-        $items = $items instanceof Traversable ? iterator_to_array($items) : $items;
+        $items = $items instanceof Traversable ? iterator_to_array($items, false) : $items;
 
         return array_map($this->callback, $items);
     }
